@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsApplication1", "WindowsApplication1\WindowsApplication1.csproj", "{EDCB148E-B155-4085-BB1D-7B1F7B4507D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageBoxManager", "MessageBoxManager\MessageBoxManager.csproj", "{0E9D874E-5354-465E-9EC3-F7A35C268A8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsApplication2", "WindowsApplication2\WindowsApplication2.csproj", "{79936B99-B195-4916-90B7-807E295027D5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EDCB148E-B155-4085-BB1D-7B1F7B4507D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDCB148E-B155-4085-BB1D-7B1F7B4507D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDCB148E-B155-4085-BB1D-7B1F7B4507D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDCB148E-B155-4085-BB1D-7B1F7B4507D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E9D874E-5354-465E-9EC3-F7A35C268A8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E9D874E-5354-465E-9EC3-F7A35C268A8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E9D874E-5354-465E-9EC3-F7A35C268A8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E9D874E-5354-465E-9EC3-F7A35C268A8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79936B99-B195-4916-90B7-807E295027D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79936B99-B195-4916-90B7-807E295027D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79936B99-B195-4916-90B7-807E295027D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79936B99-B195-4916-90B7-807E295027D5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
