@@ -1,6 +1,10 @@
 ﻿using System.Windows.Forms;
 using System.Linq;
-using System;
+using System.Text;
+using System.Web.Security;
+using System.Security.Cryptography;
+using Google.Authenticator;
+using Microsoft.VisualBasic;
 
 namespace CAESAR
 {
@@ -12,22 +16,23 @@ namespace CAESAR
         private void btnEnc_Click(object sender, System.EventArgs e)
         {
             // dlgCipherText.Default.ShowDialog();
+            var input = Interaction.InputBox("Enter 6-digit PIN", "CAESAR", "PIN");
+            MessageBox.Show(VerifyPin(input).ToString());
         }
 
         private void btnProcFolder_Click(object sender, System.EventArgs e)
         {
+            // TODO: Custom MessageBox with "Encrypt" and "Decrypt" buttons
             if (fbdSelect.ShowDialog() != DialogResult.OK) return;
-            switch (MessageBox.Show(@"Click 'Yes' for encryption and 'No' for decryption.", @"Encryption Choice", MessageBoxButtons.YesNoCancel))
+            switch (MessageBox.Show("Click 'Yes' for encryption and 'No' for decryption.", "Encryption Choice", MessageBoxButtons.YesNoCancel))
             {
                 case DialogResult.Yes:
 
-                    // Add the ENCRYPT property to all the files within the specified folder
                     foreach (var f in System.IO.Directory.GetFiles(fbdSelect.SelectedPath)) lvwLoad.Items.Add(new ListViewItem(new[] {f, "ENCRYPT" }));
                     break;
 						
                 case DialogResult.No:
 
-                    // Add the DECRYPT property to all the files within the specified folder
                     foreach (var f in System.IO.Directory.GetFiles(fbdSelect.SelectedPath)) lvwLoad.Items.Add(new ListViewItem(new[] {f, "DECRYPT"}));
                     break;
 
@@ -49,27 +54,27 @@ namespace CAESAR
         {
             if (lvwLoad.Items.Count < 1)
             {
-                MessageBox.Show(@"There is nothing to process.", @"CAESAR", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("There is nothing to process.", "CAESAR", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
-            if (lvwLoad.Items.Cast<ListViewItem>().Select(_ => _.Text).Contains("DECRYPT"))
+            if (lvwLoad.Items.Cast<ListViewItem>().Select(_ => _.SubItems[1].Text).Contains("DECRYPT"))
             {
-                // TODO: Build authentication dialog
-                switch (/*logDecrypt.Default.ShowDialog()*/)
-				{
-					case DialogResult.OK: //If the user clicked OK and the password is good, exit the switch block and run the decryption sub
-						break;
-					case DialogResult.Abort: //If the user clicked OK and the password is bad, exit the whole process with an error message
-						MessageBox.Show(@"Incorrect password.", @"CAESAR", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-						return;
-					case DialogResult.Cancel: //If the user clicked Cancel, exit the whole process with an info message
-                        MessageBox.Show(@"Incorrect password.", @"CAESAR", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                var ld = new logDecrypt();
+                switch (ld.ShowDialog(this))
+                {
+                    case DialogResult.OK:
+                        break;
+                    case DialogResult.Abort:
+                        MessageBox.Show("Incorrect password.", "CAESAR", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;
-				}
+                    case DialogResult.Cancel:
+                        return;
+                }
                 ProcDecrypt();
             }
-            else
+
+            if (lvwLoad.Items.Cast<ListViewItem>().Select(_ => _.SubItems[1].Text).Contains("ENCRYPT"))
             {
                 ProcEncrypt();
             }
@@ -78,13 +83,13 @@ namespace CAESAR
         // TODO: Implement decryption method
         private void ProcDecrypt()
         {
-            var decryptFiles = lvwLoad.Items.Cast<ListViewItem>().Where(i => i.SubItems[1].Text == @"DECRYPT").Select(_ => _.Text);
+            var decryptFiles = lvwLoad.Items.Cast<ListViewItem>().Where(i => i.SubItems[1].Text == "DECRYPT").Select(_ => _.Text);
         }
 
         private void btnRemove_Click(object sender, System.EventArgs e)
         {
             if (lvwLoad.SelectedItems.Count < 1)
-                MessageBox.Show(@"You have not selected anything to remove.", @"CAESAR", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("You have not selected anything to remove.", "CAESAR", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             else
                 foreach (ListViewItem lvi in lvwLoad.SelectedItems) lvwLoad.Items.Remove(lvi);
         }
@@ -93,12 +98,58 @@ namespace CAESAR
         private void btnOptions_Click(object sender, System.EventArgs e)
         {
             // dlgOptions.Default.ShowDialog();
+            var tfa = new TwoFactorAuthenticator();
+            var info = tfa.GenerateSetupCode("CAESAR", "sceleris@protonmail.ch",
+                Encoding.ASCII.GetString(
+                ProtectedData.Unprotect(
+                System.IO.File.ReadAllBytes(@"tfbin"), null, DataProtectionScope.CurrentUser)), 300, 300);
+            MessageBox.Show("Here is your account code:\n" + info.ManualEntryKey, @"CAESAR", MessageBoxButtons.OK);
+
         }
 
         // TODO: Finish encryption method
         private void ProcEncrypt()
         {
-            var encryptFiles = lvwLoad.Items.Cast<ListViewItem>().Where(i => i.SubItems[1].Text == @"ENCRYPT").Select(_ => _.Text);
+            var encryptFiles = lvwLoad.Items.Cast<ListViewItem>().Where(i => i.SubItems[1].Text == "ENCRYPT").Select(_ => _.Text);
+
+            
+
+        }
+
+        private void btnChPass_Click(object sender, System.EventArgs e)
+        {
+            switch (MessageBox.Show("Are you sure you want a new key? This will render all currently encrypted files indecipherable.", "CAESAR", MessageBoxButtons.OKCancel))
+            {
+                case DialogResult.OK:
+                    string accountCode = Membership.GeneratePassword(16, 6);
+                    byte[] key = Encoding.ASCII.GetBytes(accountCode);
+                    System.IO.File.WriteAllBytes(@"tfbin", ProtectedData.Protect(key, null, DataProtectionScope.CurrentUser));
+
+                    var tfa = new TwoFactorAuthenticator();
+                    var info = tfa.GenerateSetupCode("CAESAR", "sceleris@protonmail.ch", accountCode, 300, 300);
+                    
+                    MessageBox.Show("Here is your new account code:\n\n" + info.ManualEntryKey, "CAESAR", MessageBoxButtons.OK);
+                    break;
+      
+                case DialogResult.Cancel:
+                    return;
+            }
+        }
+
+        private bool VerifyPin(string pin)
+        {
+            var tfa = new TwoFactorAuthenticator();
+            bool verified =
+                tfa.ValidateTwoFactorPIN(
+                Encoding.ASCII.GetString(
+                ProtectedData.Unprotect(
+                System.IO.File.ReadAllBytes(@"tfbin"), null, DataProtectionScope.CurrentUser)), pin);
+
+            return verified;
+        }
+
+        private void ofdEncWholeFile_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
+        {
 
         }
     }

@@ -64,6 +64,7 @@ namespace CAESAR
             this.btnChPass.TabIndex = 2;
             this.btnChPass.Text = "Change Password";
             this.btnChPass.UseVisualStyleBackColor = true;
+            this.btnChPass.Click += new System.EventHandler(this.btnChPass_Click);
             // 
             // ofdEncWholeFile
             // 
@@ -71,6 +72,7 @@ namespace CAESAR
             this.ofdEncWholeFile.Filter = "Text Files|*.txt|All files|*.*";
             this.ofdEncWholeFile.Multiselect = true;
             this.ofdEncWholeFile.Title = "Encryption: File";
+            this.ofdEncWholeFile.FileOk += new System.ComponentModel.CancelEventHandler(this.ofdEncWholeFile_FileOk);
             // 
             // btnLoadDec
             // 
