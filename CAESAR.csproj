@@ -76,6 +76,9 @@
     <EmbeddedResource Include="frmCrypto.resx">
       <DependentUpon>frmCrypto.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmCrypto.uk.resx">
+      <DependentUpon>frmCrypto.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="pinForm.resx">
       <DependentUpon>pinForm.cs</DependentUpon>
     </EmbeddedResource>

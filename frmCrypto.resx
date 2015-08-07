@@ -117,13 +117,286 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnChPass.Location" type="System.Drawing.Point, System.Drawing">
+    <value>356, 211</value>
+  </data>
+  <data name="btnChPass.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 23</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="btnChPass.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="btnChPass.Text" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="&gt;&gt;btnChPass.Name" xml:space="preserve">
+    <value>btnChPass</value>
+  </data>
+  <data name="&gt;&gt;btnChPass.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnChPass.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnChPass.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
   <metadata name="ofdEncWholeFile.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="ofdEncWholeFile.Filter" xml:space="preserve">
+    <value>Text Files|*.txt|All files|*.*</value>
+  </data>
+  <data name="ofdEncWholeFile.Title" xml:space="preserve">
+    <value>Encryption: File</value>
+  </data>
+  <data name="btnLoadDec.Location" type="System.Drawing.Point, System.Drawing">
+    <value>92, 179</value>
+  </data>
+  <data name="btnLoadDec.Size" type="System.Drawing.Size, System.Drawing">
+    <value>127, 23</value>
+  </data>
+  <data name="btnLoadDec.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="btnLoadDec.Text" xml:space="preserve">
+    <value>Decrypt...</value>
+  </data>
+  <data name="&gt;&gt;btnLoadDec.Name" xml:space="preserve">
+    <value>btnLoadDec</value>
+  </data>
+  <data name="&gt;&gt;btnLoadDec.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnLoadDec.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnLoadDec.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="btnLoadEnc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>92, 211</value>
+  </data>
+  <data name="btnLoadEnc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>127, 23</value>
+  </data>
+  <data name="btnLoadEnc.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="btnLoadEnc.Text" xml:space="preserve">
+    <value>Encrypt...</value>
+  </data>
+  <data name="&gt;&gt;btnLoadEnc.Name" xml:space="preserve">
+    <value>btnLoadEnc</value>
+  </data>
+  <data name="&gt;&gt;btnLoadEnc.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnLoadEnc.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnLoadEnc.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="btnProc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 179</value>
+  </data>
+  <data name="btnProc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>72, 55</value>
+  </data>
+  <data name="btnProc.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="btnProc.Text" xml:space="preserve">
+    <value>Process</value>
+  </data>
+  <data name="&gt;&gt;btnProc.Name" xml:space="preserve">
+    <value>btnProc</value>
+  </data>
+  <data name="&gt;&gt;btnProc.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnProc.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnProc.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lvwLoad.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left</value>
+  </data>
+  <data name="chFile.Text" xml:space="preserve">
+    <value>File Name</value>
+  </data>
+  <data name="chFile.Width" type="System.Int32, mscorlib">
+    <value>358</value>
+  </data>
+  <data name="chType.Text" xml:space="preserve">
+    <value>Process Type</value>
+  </data>
+  <data name="chType.Width" type="System.Int32, mscorlib">
+    <value>79</value>
+  </data>
+  <data name="lvwLoad.LabelWrap" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="lvwLoad.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 12</value>
+  </data>
+  <data name="lvwLoad.Size" type="System.Drawing.Size, System.Drawing">
+    <value>443, 161</value>
+  </data>
+  <data name="lvwLoad.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;lvwLoad.Name" xml:space="preserve">
+    <value>lvwLoad</value>
+  </data>
+  <data name="&gt;&gt;lvwLoad.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lvwLoad.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lvwLoad.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <metadata name="fbdSelect.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>180, 17</value>
   </metadata>
+  <data name="btnRemove.Location" type="System.Drawing.Point, System.Drawing">
+    <value>356, 179</value>
+  </data>
+  <data name="btnRemove.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 23</value>
+  </data>
+  <data name="btnRemove.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="btnRemove.Text" xml:space="preserve">
+    <value>Remove From List</value>
+  </data>
+  <data name="&gt;&gt;btnRemove.Name" xml:space="preserve">
+    <value>btnRemove</value>
+  </data>
+  <data name="&gt;&gt;btnRemove.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnRemove.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnRemove.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="btnProcFolder.Location" type="System.Drawing.Point, System.Drawing">
+    <value>225, 211</value>
+  </data>
+  <data name="btnProcFolder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 23</value>
+  </data>
+  <data name="btnProcFolder.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="btnProcFolder.Text" xml:space="preserve">
+    <value>Load Folder</value>
+  </data>
+  <data name="&gt;&gt;btnProcFolder.Name" xml:space="preserve">
+    <value>btnProcFolder</value>
+  </data>
+  <data name="&gt;&gt;btnProcFolder.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnProcFolder.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnProcFolder.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
   <metadata name="ofdDecFile.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>298, 17</value>
   </metadata>
+  <data name="ofdDecFile.Filter" xml:space="preserve">
+    <value>Encrypted Files|*.aesx|Text Files|*.txt|All Files|*.*</value>
+  </data>
+  <data name="ofdDecFile.Title" xml:space="preserve">
+    <value>Decryption: Text/File</value>
+  </data>
+  <data name="btnOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>225, 179</value>
+  </data>
+  <data name="btnOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 23</value>
+  </data>
+  <data name="btnOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="btnOptions.Text" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="&gt;&gt;btnOptions.Name" xml:space="preserve">
+    <value>btnOptions</value>
+  </data>
+  <data name="&gt;&gt;btnOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnOptions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnOptions.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>471, 246</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>CAESAR</value>
+  </data>
+  <data name="&gt;&gt;ofdEncWholeFile.Name" xml:space="preserve">
+    <value>ofdEncWholeFile</value>
+  </data>
+  <data name="&gt;&gt;ofdEncWholeFile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chFile.Name" xml:space="preserve">
+    <value>chFile</value>
+  </data>
+  <data name="&gt;&gt;chFile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chType.Name" xml:space="preserve">
+    <value>chType</value>
+  </data>
+  <data name="&gt;&gt;chType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;fbdSelect.Name" xml:space="preserve">
+    <value>fbdSelect</value>
+  </data>
+  <data name="&gt;&gt;fbdSelect.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FolderBrowserDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ofdDecFile.Name" xml:space="preserve">
+    <value>ofdDecFile</value>
+  </data>
+  <data name="&gt;&gt;ofdDecFile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>frmCrypto</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

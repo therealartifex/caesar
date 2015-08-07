@@ -30,6 +30,7 @@ namespace CAESAR
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCrypto));
             this.btnChPass = new System.Windows.Forms.Button();
             this.ofdEncWholeFile = new System.Windows.Forms.OpenFileDialog();
             this.btnLoadDec = new System.Windows.Forms.Button();
@@ -47,124 +48,93 @@ namespace CAESAR
             // 
             // btnChPass
             // 
-            this.btnChPass.Location = new System.Drawing.Point(356, 211);
+            resources.ApplyResources(this.btnChPass, "btnChPass");
             this.btnChPass.Name = "btnChPass";
-            this.btnChPass.Size = new System.Drawing.Size(101, 23);
-            this.btnChPass.TabIndex = 2;
-            this.btnChPass.Text = "Change Password";
             this.btnChPass.UseVisualStyleBackColor = true;
             this.btnChPass.Click += new System.EventHandler(this.btnChPass_Click);
             // 
             // ofdEncWholeFile
             // 
             this.ofdEncWholeFile.DefaultExt = "txt";
-            this.ofdEncWholeFile.Filter = "Text Files|*.txt|All files|*.*";
+            resources.ApplyResources(this.ofdEncWholeFile, "ofdEncWholeFile");
             this.ofdEncWholeFile.Multiselect = true;
-            this.ofdEncWholeFile.Title = "Encryption: File";
             this.ofdEncWholeFile.FileOk += new System.ComponentModel.CancelEventHandler(this.ofdEncWholeFile_FileOk);
             // 
             // btnLoadDec
             // 
-            this.btnLoadDec.Location = new System.Drawing.Point(92, 179);
+            resources.ApplyResources(this.btnLoadDec, "btnLoadDec");
             this.btnLoadDec.Name = "btnLoadDec";
-            this.btnLoadDec.Size = new System.Drawing.Size(127, 23);
-            this.btnLoadDec.TabIndex = 5;
-            this.btnLoadDec.Text = "Decrypt...";
             this.btnLoadDec.UseVisualStyleBackColor = true;
             this.btnLoadDec.Click += new System.EventHandler(this.btnLoadDec_Click);
             // 
             // btnLoadEnc
             // 
-            this.btnLoadEnc.Location = new System.Drawing.Point(92, 211);
+            resources.ApplyResources(this.btnLoadEnc, "btnLoadEnc");
             this.btnLoadEnc.Name = "btnLoadEnc";
-            this.btnLoadEnc.Size = new System.Drawing.Size(127, 23);
-            this.btnLoadEnc.TabIndex = 6;
-            this.btnLoadEnc.Text = "Encrypt...";
             this.btnLoadEnc.UseVisualStyleBackColor = true;
             this.btnLoadEnc.Click += new System.EventHandler(this.btnLoadEnc_Click);
             // 
             // btnProc
             // 
-            this.btnProc.Location = new System.Drawing.Point(14, 179);
+            resources.ApplyResources(this.btnProc, "btnProc");
             this.btnProc.Name = "btnProc";
-            this.btnProc.Size = new System.Drawing.Size(72, 55);
-            this.btnProc.TabIndex = 7;
-            this.btnProc.Text = "Process";
             this.btnProc.UseVisualStyleBackColor = true;
             this.btnProc.Click += new System.EventHandler(this.btnProc_Click);
             // 
             // lvwLoad
             // 
             this.lvwLoad.AllowDrop = true;
-            this.lvwLoad.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            resources.ApplyResources(this.lvwLoad, "lvwLoad");
             this.lvwLoad.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chFile,
             this.chType});
             this.lvwLoad.FullRowSelect = true;
             this.lvwLoad.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.lvwLoad.LabelWrap = false;
-            this.lvwLoad.Location = new System.Drawing.Point(14, 12);
             this.lvwLoad.Name = "lvwLoad";
-            this.lvwLoad.Size = new System.Drawing.Size(443, 161);
-            this.lvwLoad.TabIndex = 8;
             this.lvwLoad.UseCompatibleStateImageBehavior = false;
             this.lvwLoad.View = System.Windows.Forms.View.Details;
             // 
             // chFile
             // 
-            this.chFile.Text = "File Name";
-            this.chFile.Width = 358;
+            resources.ApplyResources(this.chFile, "chFile");
             // 
             // chType
             // 
-            this.chType.Text = "Process Type";
-            this.chType.Width = 79;
+            resources.ApplyResources(this.chType, "chType");
             // 
             // btnRemove
             // 
-            this.btnRemove.Location = new System.Drawing.Point(356, 179);
+            resources.ApplyResources(this.btnRemove, "btnRemove");
             this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(101, 23);
-            this.btnRemove.TabIndex = 9;
-            this.btnRemove.Text = "Remove From List";
             this.btnRemove.UseVisualStyleBackColor = true;
             this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // btnProcFolder
             // 
-            this.btnProcFolder.Location = new System.Drawing.Point(225, 211);
+            resources.ApplyResources(this.btnProcFolder, "btnProcFolder");
             this.btnProcFolder.Name = "btnProcFolder";
-            this.btnProcFolder.Size = new System.Drawing.Size(125, 23);
-            this.btnProcFolder.TabIndex = 11;
-            this.btnProcFolder.Text = "Load Folder";
             this.btnProcFolder.UseVisualStyleBackColor = true;
             this.btnProcFolder.Click += new System.EventHandler(this.btnProcFolder_Click);
             // 
             // ofdDecFile
             // 
             this.ofdDecFile.AddExtension = false;
-            this.ofdDecFile.Filter = "Encrypted Files|*.aesx|Text Files|*.txt|All Files|*.*";
+            resources.ApplyResources(this.ofdDecFile, "ofdDecFile");
             this.ofdDecFile.Multiselect = true;
             this.ofdDecFile.SupportMultiDottedExtensions = true;
-            this.ofdDecFile.Title = "Decryption: Text/File";
             this.ofdDecFile.FileOk += new System.ComponentModel.CancelEventHandler(this.ofdDecFile_FileOk);
             // 
             // btnOptions
             // 
-            this.btnOptions.Location = new System.Drawing.Point(225, 179);
+            resources.ApplyResources(this.btnOptions, "btnOptions");
             this.btnOptions.Name = "btnOptions";
-            this.btnOptions.Size = new System.Drawing.Size(125, 23);
-            this.btnOptions.TabIndex = 10;
-            this.btnOptions.Text = "Options";
             this.btnOptions.UseVisualStyleBackColor = true;
             this.btnOptions.Click += new System.EventHandler(this.btnOptions_Click);
             // 
             // frmCrypto
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(471, 246);
             this.Controls.Add(this.lvwLoad);
             this.Controls.Add(this.btnProc);
             this.Controls.Add(this.btnLoadEnc);
@@ -177,8 +147,6 @@ namespace CAESAR
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "frmCrypto";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "CAESAR";
             this.Load += new System.EventHandler(this.frmCrypto_Load);
             this.ResumeLayout(false);
 

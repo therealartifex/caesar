@@ -79,11 +79,67 @@ namespace CAESAR.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Here is your account code:
+        ///
+        ///.
+        /// </summary>
+        internal static string MessageAccountCode {
+            get {
+                return ResourceManager.GetString("MessageAccountCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CAESAR.
         /// </summary>
         internal static string MessageBoxCaption {
             get {
                 return ResourceManager.GetString("MessageBoxCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is nothing to process..
+        /// </summary>
+        internal static string MessageNoProcess {
+            get {
+                return ResourceManager.GetString("MessageNoProcess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have not selected anything to remove..
+        /// </summary>
+        internal static string MessageNoRemove {
+            get {
+                return ResourceManager.GetString("MessageNoRemove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Incorrect PIN..
+        /// </summary>
+        internal static string MessageWrongPIN {
+            get {
+                return ResourceManager.GetString("MessageWrongPIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How would you like to process the files in this folder?.
+        /// </summary>
+        internal static string ProcessFolderPrompt {
+            get {
+                return ResourceManager.GetString("ProcessFolderPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want a new key? This will render all currently encrypted files indecipherable..
+        /// </summary>
+        internal static string PromptNewKey {
+            get {
+                return ResourceManager.GetString("PromptNewKey", resourceCulture);
             }
         }
     }

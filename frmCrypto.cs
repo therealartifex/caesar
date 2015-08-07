@@ -20,7 +20,7 @@ namespace CAESAR
             MessageBoxManager.No = "Decrypt";
             MessageBoxManager.Register();
 
-            switch (MessageBox.Show("How would you like to process the files in this folder?", Resources.MessageBoxCaption, MessageBoxButtons.YesNoCancel))
+            switch (MessageBox.Show(Resources.ProcessFolderPrompt, Resources.MessageBoxCaption, MessageBoxButtons.YesNoCancel))
             {
                 case DialogResult.Yes:
 
@@ -51,7 +51,7 @@ namespace CAESAR
         {
             if (lvwLoad.Items.Count < 1)
             {
-                MessageBox.Show("There is nothing to process.", Resources.MessageBoxCaption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(Resources.MessageNoProcess, Resources.MessageBoxCaption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
@@ -63,7 +63,7 @@ namespace CAESAR
                     case DialogResult.OK:
                         break;
                     case DialogResult.Abort:
-                        MessageBox.Show("Incorrect PIN.", Resources.MessageBoxCaption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MessageBox.Show(Resources.MessageWrongPIN, Resources.MessageBoxCaption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;
                     case DialogResult.Cancel:
                         return;
@@ -86,7 +86,7 @@ namespace CAESAR
         private void btnRemove_Click(object sender, System.EventArgs e)
         {
             if (lvwLoad.SelectedItems.Count < 1)
-                MessageBox.Show("You have not selected anything to remove.", Resources.MessageBoxCaption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(Resources.MessageNoRemove, Resources.MessageBoxCaption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             else
                 foreach (ListViewItem lvi in lvwLoad.SelectedItems) lvwLoad.Items.Remove(lvi);
         }
@@ -94,13 +94,12 @@ namespace CAESAR
         // TODO: Build Options dialog
         private void btnOptions_Click(object sender, System.EventArgs e)
         {
-            // dlgOptions.Default.ShowDialog();
             var tfa = new TwoFactorAuthenticator();
-            var info = tfa.GenerateSetupCode("CAESAR", "sceleris@protonmail.ch",
+            var info = tfa.GenerateSetupCode("CAESAR",
                 Encoding.ASCII.GetString(
                 ProtectedData.Unprotect(
                 System.IO.File.ReadAllBytes(@"tfbin"), null, DataProtectionScope.CurrentUser)), 300, 300);
-            MessageBox.Show("Here is your account code:\n" + info.ManualEntryKey, Resources.MessageBoxCaption, MessageBoxButtons.OK);
+            MessageBox.Show(Resources.MessageAccountCode + info.ManualEntryKey, Resources.MessageBoxCaption, MessageBoxButtons.OK);
         }
 
 
@@ -112,7 +111,7 @@ namespace CAESAR
 
         private void btnChPass_Click(object sender, System.EventArgs e)
         {
-            switch (MessageBox.Show("Are you sure you want a new key? This will render all currently encrypted files indecipherable.", Resources.MessageBoxCaption, MessageBoxButtons.OKCancel))
+            switch (MessageBox.Show(Resources.PromptNewKey, Resources.MessageBoxCaption, MessageBoxButtons.OKCancel))
             {
                 case DialogResult.OK:
                     string accountCode = Membership.GeneratePassword(16, 6);
@@ -120,9 +119,9 @@ namespace CAESAR
                     System.IO.File.WriteAllBytes(@"tfbin", ProtectedData.Protect(key, null, DataProtectionScope.CurrentUser));
 
                     var tfa = new TwoFactorAuthenticator();
-                    var info = tfa.GenerateSetupCode("CAESAR", "sceleris@protonmail.ch", accountCode, 300, 300);
+                    var info = tfa.GenerateSetupCode("CAESAR", accountCode, 300, 300);
                     
-                    MessageBox.Show("Here is your new account code:\n\n" + info.ManualEntryKey, Resources.MessageBoxCaption, MessageBoxButtons.OK);
+                    MessageBox.Show(Resources.MessageAccountCode + info.ManualEntryKey, Resources.MessageBoxCaption, MessageBoxButtons.OK);
                     break;
       
                 case DialogResult.Cancel:
