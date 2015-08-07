@@ -64,19 +64,20 @@
     <Compile Include="frmCrypto.Designer.cs">
       <DependentUpon>frmCrypto.cs</DependentUpon>
     </Compile>
-    <Compile Include="logDecrypt.cs">
+    <Compile Include="pinForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="logDecrypt.Designer.cs">
-      <DependentUpon>logDecrypt.cs</DependentUpon>
+    <Compile Include="pinForm.Designer.cs">
+      <DependentUpon>pinForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MessageBoxManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmCrypto.resx">
       <DependentUpon>frmCrypto.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="logDecrypt.resx">
-      <DependentUpon>logDecrypt.cs</DependentUpon>
+    <EmbeddedResource Include="pinForm.resx">
+      <DependentUpon>pinForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

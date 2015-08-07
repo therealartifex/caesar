@@ -30,7 +30,6 @@ namespace CAESAR
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnEnc = new System.Windows.Forms.Button();
             this.btnChPass = new System.Windows.Forms.Button();
             this.ofdEncWholeFile = new System.Windows.Forms.OpenFileDialog();
             this.btnLoadDec = new System.Windows.Forms.Button();
@@ -41,24 +40,14 @@ namespace CAESAR
             this.chType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.fbdSelect = new System.Windows.Forms.FolderBrowserDialog();
             this.btnRemove = new System.Windows.Forms.Button();
-            this.btnOptions = new System.Windows.Forms.Button();
             this.btnProcFolder = new System.Windows.Forms.Button();
             this.ofdDecFile = new System.Windows.Forms.OpenFileDialog();
+            this.btnOptions = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // btnEnc
-            // 
-            this.btnEnc.Location = new System.Drawing.Point(148, 179);
-            this.btnEnc.Name = "btnEnc";
-            this.btnEnc.Size = new System.Drawing.Size(125, 23);
-            this.btnEnc.TabIndex = 0;
-            this.btnEnc.Text = "Edit Encrypted File";
-            this.btnEnc.UseVisualStyleBackColor = true;
-            this.btnEnc.Click += new System.EventHandler(this.btnEnc_Click);
             // 
             // btnChPass
             // 
-            this.btnChPass.Location = new System.Drawing.Point(412, 211);
+            this.btnChPass.Location = new System.Drawing.Point(356, 211);
             this.btnChPass.Name = "btnChPass";
             this.btnChPass.Size = new System.Drawing.Size(101, 23);
             this.btnChPass.TabIndex = 2;
@@ -76,27 +65,27 @@ namespace CAESAR
             // 
             // btnLoadDec
             // 
-            this.btnLoadDec.Location = new System.Drawing.Point(279, 179);
+            this.btnLoadDec.Location = new System.Drawing.Point(92, 179);
             this.btnLoadDec.Name = "btnLoadDec";
             this.btnLoadDec.Size = new System.Drawing.Size(127, 23);
             this.btnLoadDec.TabIndex = 5;
-            this.btnLoadDec.Text = "Load for Decryption...";
+            this.btnLoadDec.Text = "Decrypt...";
             this.btnLoadDec.UseVisualStyleBackColor = true;
             this.btnLoadDec.Click += new System.EventHandler(this.btnLoadDec_Click);
             // 
             // btnLoadEnc
             // 
-            this.btnLoadEnc.Location = new System.Drawing.Point(279, 211);
+            this.btnLoadEnc.Location = new System.Drawing.Point(92, 211);
             this.btnLoadEnc.Name = "btnLoadEnc";
             this.btnLoadEnc.Size = new System.Drawing.Size(127, 23);
             this.btnLoadEnc.TabIndex = 6;
-            this.btnLoadEnc.Text = "Load for Encryption...";
+            this.btnLoadEnc.Text = "Encrypt...";
             this.btnLoadEnc.UseVisualStyleBackColor = true;
             this.btnLoadEnc.Click += new System.EventHandler(this.btnLoadEnc_Click);
             // 
             // btnProc
             // 
-            this.btnProc.Location = new System.Drawing.Point(12, 179);
+            this.btnProc.Location = new System.Drawing.Point(14, 179);
             this.btnProc.Name = "btnProc";
             this.btnProc.Size = new System.Drawing.Size(72, 55);
             this.btnProc.TabIndex = 7;
@@ -107,18 +96,17 @@ namespace CAESAR
             // lvwLoad
             // 
             this.lvwLoad.AllowDrop = true;
-            this.lvwLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvwLoad.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.lvwLoad.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chFile,
             this.chType});
             this.lvwLoad.FullRowSelect = true;
             this.lvwLoad.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.lvwLoad.LabelWrap = false;
-            this.lvwLoad.Location = new System.Drawing.Point(12, 12);
+            this.lvwLoad.Location = new System.Drawing.Point(14, 12);
             this.lvwLoad.Name = "lvwLoad";
-            this.lvwLoad.Size = new System.Drawing.Size(501, 161);
+            this.lvwLoad.Size = new System.Drawing.Size(443, 161);
             this.lvwLoad.TabIndex = 8;
             this.lvwLoad.UseCompatibleStateImageBehavior = false;
             this.lvwLoad.View = System.Windows.Forms.View.Details;
@@ -126,16 +114,16 @@ namespace CAESAR
             // chFile
             // 
             this.chFile.Text = "File Name";
-            this.chFile.Width = 411;
+            this.chFile.Width = 358;
             // 
             // chType
             // 
             this.chType.Text = "Process Type";
-            this.chType.Width = 85;
+            this.chType.Width = 79;
             // 
             // btnRemove
             // 
-            this.btnRemove.Location = new System.Drawing.Point(412, 179);
+            this.btnRemove.Location = new System.Drawing.Point(356, 179);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(101, 23);
             this.btnRemove.TabIndex = 9;
@@ -143,19 +131,9 @@ namespace CAESAR
             this.btnRemove.UseVisualStyleBackColor = true;
             this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
-            // btnOptions
-            // 
-            this.btnOptions.Location = new System.Drawing.Point(90, 179);
-            this.btnOptions.Name = "btnOptions";
-            this.btnOptions.Size = new System.Drawing.Size(52, 55);
-            this.btnOptions.TabIndex = 10;
-            this.btnOptions.Text = "Log Options";
-            this.btnOptions.UseVisualStyleBackColor = true;
-            this.btnOptions.Click += new System.EventHandler(this.btnOptions_Click);
-            // 
             // btnProcFolder
             // 
-            this.btnProcFolder.Location = new System.Drawing.Point(148, 211);
+            this.btnProcFolder.Location = new System.Drawing.Point(225, 211);
             this.btnProcFolder.Name = "btnProcFolder";
             this.btnProcFolder.Size = new System.Drawing.Size(125, 23);
             this.btnProcFolder.TabIndex = 11;
@@ -172,12 +150,21 @@ namespace CAESAR
             this.ofdDecFile.Title = "Decryption: Text/File";
             this.ofdDecFile.FileOk += new System.ComponentModel.CancelEventHandler(this.ofdDecFile_FileOk);
             // 
+            // btnOptions
+            // 
+            this.btnOptions.Location = new System.Drawing.Point(225, 179);
+            this.btnOptions.Name = "btnOptions";
+            this.btnOptions.Size = new System.Drawing.Size(125, 23);
+            this.btnOptions.TabIndex = 10;
+            this.btnOptions.Text = "Options";
+            this.btnOptions.UseVisualStyleBackColor = true;
+            this.btnOptions.Click += new System.EventHandler(this.btnOptions_Click);
+            // 
             // frmCrypto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(525, 246);
-            this.Controls.Add(this.btnEnc);
+            this.ClientSize = new System.Drawing.Size(471, 246);
             this.Controls.Add(this.lvwLoad);
             this.Controls.Add(this.btnProc);
             this.Controls.Add(this.btnLoadEnc);
@@ -192,13 +179,12 @@ namespace CAESAR
             this.Name = "frmCrypto";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CAESAR";
+            this.Load += new System.EventHandler(this.frmCrypto_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private Button btnEnc;
         private Button btnChPass;
         private OpenFileDialog ofdDecFile;
         private OpenFileDialog ofdEncWholeFile;
@@ -209,9 +195,8 @@ namespace CAESAR
         private ColumnHeader chFile;
         private ColumnHeader chType;
         private Button btnRemove;
-        private Button btnOptions;
         private Button btnProcFolder;
         private FolderBrowserDialog fbdSelect;
-
+        private Button btnOptions;
     }
 }

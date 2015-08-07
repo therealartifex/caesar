@@ -5,12 +5,12 @@ using System.Windows.Forms;
 
 namespace CAESAR
 {
-    public partial class logDecrypt : Form
+    public partial class pinForm : Form
     {
         private bool VerifyPin(string pin)
         {
             var tfa = new TwoFactorAuthenticator();
-            bool verified =
+            var verified =
                 tfa.ValidateTwoFactorPIN(
                 Encoding.ASCII.GetString(
                 ProtectedData.Unprotect(
@@ -19,15 +19,14 @@ namespace CAESAR
             return verified;
         }
 
-        public logDecrypt()
+        public pinForm()
         {
             InitializeComponent();
         }
 
         private void OK_Click(object sender, System.EventArgs e)
         {
-            if (VerifyPin(PasswordTextBox.Text)) DialogResult = DialogResult.OK;
-            else DialogResult = DialogResult.Abort;
+            DialogResult = VerifyPin(PasswordTextBox.Text) ? DialogResult.OK : DialogResult.Abort;
         }
 
         private void Cancel_Click(object sender, System.EventArgs e)

@@ -59,5 +59,32 @@ namespace CAESAR.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DECRYPT.
+        /// </summary>
+        internal static string DecryptProperty {
+            get {
+                return ResourceManager.GetString("DecryptProperty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ENCRYPT.
+        /// </summary>
+        internal static string EncryptProperty {
+            get {
+                return ResourceManager.GetString("EncryptProperty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CAESAR.
+        /// </summary>
+        internal static string MessageBoxCaption {
+            get {
+                return ResourceManager.GetString("MessageBoxCaption", resourceCulture);
+            }
+        }
     }
 }

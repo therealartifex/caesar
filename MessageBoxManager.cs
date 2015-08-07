@@ -1,5 +1,4 @@
 #pragma warning disable 0618
-using System;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
@@ -71,12 +70,12 @@ namespace System.Windows.Forms
 			public IntPtr lResult;
 			public IntPtr lParam;
 			public IntPtr wParam;
-			public uint   message;
+			public uint message;
 			public IntPtr hwnd;
 		};
 
-		private static HookProc hookProc;
-        private static EnumChildProc enumProc;
+		private static readonly HookProc hookProc;
+        private static readonly EnumChildProc enumProc;
         [ThreadStatic]
 		private static IntPtr hHook;
         [ThreadStatic]
@@ -113,8 +112,8 @@ namespace System.Windows.Forms
 
 		static MessageBoxManager()
 		{
-			hookProc = new HookProc(MessageBoxHookProc);
-            enumProc = new EnumChildProc(MessageBoxEnumProc);
+			hookProc = MessageBoxHookProc;
+            enumProc = MessageBoxEnumProc;
 			hHook = IntPtr.Zero;
 		}
 		
@@ -127,8 +126,7 @@ namespace System.Windows.Forms
         /// </remarks>
 		public static void Register()
 		{
-			if (hHook != IntPtr.Zero)
-				throw new NotSupportedException("One hook per thread allowed.");
+			if (hHook != IntPtr.Zero) throw new NotSupportedException("One hook per thread allowed.");
 			hHook = SetWindowsHookEx(WH_CALLWNDPROCRET, hookProc, IntPtr.Zero, AppDomain.GetCurrentThreadId());
 		}
 
@@ -140,11 +138,9 @@ namespace System.Windows.Forms
         /// </remarks>
         public static void Unregister()
         {
-            if (hHook != IntPtr.Zero)
-            {
-                UnhookWindowsHookEx(hHook);
-                hHook = IntPtr.Zero;
-            }
+            if (hHook == IntPtr.Zero) return;
+            UnhookWindowsHookEx(hHook);
+            hHook = IntPtr.Zero;
         }
 		
 		private static IntPtr MessageBoxHookProc(int nCode, IntPtr wParam, IntPtr lParam)
@@ -152,13 +148,13 @@ namespace System.Windows.Forms
 			if (nCode < 0)
 				return CallNextHookEx(hHook, nCode, wParam, lParam);
 
-			CWPRETSTRUCT msg = (CWPRETSTRUCT)Marshal.PtrToStructure(lParam, typeof(CWPRETSTRUCT));
-			IntPtr hook = hHook;
+			var msg = (CWPRETSTRUCT)Marshal.PtrToStructure(lParam, typeof(CWPRETSTRUCT));
+			var hook = hHook;
 
             if (msg.message == WM_INITDIALOG)
             {
-                int nLength = GetWindowTextLength(msg.hwnd);
-                StringBuilder className = new StringBuilder(10);
+                var nLength = GetWindowTextLength(msg.hwnd);
+                var className = new StringBuilder(10);
                 GetClassName(msg.hwnd, className, className.Capacity);
                 if (className.ToString() == "#32770")
                 {
@@ -166,7 +162,7 @@ namespace System.Windows.Forms
                     EnumChildWindows(msg.hwnd, enumProc, IntPtr.Zero);
                     if (nButton == 1)
                     {
-                        IntPtr hButton = GetDlgItem(msg.hwnd, MBCancel);
+                        var hButton = GetDlgItem(msg.hwnd, MBCancel);
                         if (hButton != IntPtr.Zero)
                             SetWindowText(hButton, OK);
                     }
@@ -178,11 +174,11 @@ namespace System.Windows.Forms
 
         private static bool MessageBoxEnumProc(IntPtr hWnd, IntPtr lParam)
         {
-            StringBuilder className = new StringBuilder(10);
+            var className = new StringBuilder(10);
             GetClassName(hWnd, className, className.Capacity);
             if (className.ToString() == "Button")
             {
-                int ctlId = GetDlgCtrlID(hWnd);
+                var ctlId = GetDlgCtrlID(hWnd);
                 switch (ctlId)
                 {
                     case MBOK:

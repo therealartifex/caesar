@@ -2,7 +2,7 @@
 
 namespace CAESAR
 {
-    partial class logDecrypt
+    partial class pinForm
     {
         /// <summary>
         /// Required designer variable.
