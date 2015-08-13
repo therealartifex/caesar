@@ -1,0 +1,4 @@
+language: csharp
+solution: CAESAR.sln
+mono:
+  - latest
