@@ -34,5 +34,29 @@ namespace CAESAR.Properties {
                 this["firstRun"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool obfuscation {
+            get {
+                return ((bool)(this["obfuscation"]));
+            }
+            set {
+                this["obfuscation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool keepLog {
+            get {
+                return ((bool)(this["keepLog"]));
+            }
+            set {
+                this["keepLog"] = value;
+            }
+        }
     }
 }

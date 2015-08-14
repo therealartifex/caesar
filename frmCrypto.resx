@@ -143,14 +143,14 @@
   <data name="&gt;&gt;btnChPass.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <metadata name="ofdEncWholeFile.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="ofdEncFile.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="ofdEncWholeFile.Filter" xml:space="preserve">
-    <value>Text Files|*.txt|All files|*.*</value>
+  <data name="ofdEncFile.Filter" xml:space="preserve">
+    <value>All files|*.*</value>
   </data>
-  <data name="ofdEncWholeFile.Title" xml:space="preserve">
-    <value>Encryption: File</value>
+  <data name="ofdEncFile.Title" xml:space="preserve">
+    <value>CAESAR</value>
   </data>
   <data name="btnLoadDec.Location" type="System.Drawing.Point, System.Drawing">
     <value>92, 179</value>
@@ -249,6 +249,94 @@
   <data name="lvwLoad.Size" type="System.Drawing.Size, System.Drawing">
     <value>443, 161</value>
   </data>
+  <metadata name="icoList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>407, 17</value>
+  </metadata>
+  <data name="icoList.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAq
+        EgAAAk1TRnQBSQFMAgEBAgEAAQgBAAEIAQABGAEAARgBAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFg
+        AwABGAMAAQEBAAEgBgABJBYAAwMBBAMGAQgDCgQNARIDEQEXAxUBHQMYASIDGwEnAx4BKwMgAS4DIQEx
+        AyEBMQMgAS4DHgErAxsBJwMYASIDFQEdAxEBFwMNARIDCgENAwYBCAMDAQQIAAMDAQQDBgEIAwoEDQES
+        AxEBFwMVAR0DGAEiAxsBJwMdASsDHwEuAyABMQMgATEDHwEuAx0BKwMbAScDGAEiAxUBHQMRARcDDQES
+        AwoBDQMGAQgDAwEEyAADAgEDAwUBBwMIAQsBMQEzATQBTwFCAVsBXwGRAToBWgFhAZUBNwFZAWEBmAE3
+        AVgBYQGbATYBVgFgAZ4BNwFWAWABoAE3AVYBYQGhATcBWAFiAaEBNwFYAWIBoAE2AVgBYgGeATcBWQFj
+        AZsBNgFcAWMBmAFBAV8BYgGVAU0BXQFeAZEBMAIzAU8DCAELAwUBBwMCAQMIAAMCAQMDBQEHAwgBCwEw
+        ATIBMwFPAT8BWAFcAZEBNwFWAV0BlQEyAVQBXQGYATIBUgFcAZsBMQFQAVoBngExAU8BWgGgATEBTwFa
+        AaEBMQFRAVsBoQExAVEBXAGgATEBUgFcAZ4BMgFUAV0BmwEyAVcBXgGYAT0BWwFeAZUBSgFaAVsBkQEv
+        AjIBTwMIAQsDBQEHAwIBA9QAAUkBXAFjAX8BSwHhAfgB/gEYAc0B9AH+AQEBvgHvAf4BAAGvAeAB/gEA
+        AaAB0wH+AQEBmAHLAf4BAQGXAcwB/gEBAZ0B0gH+AQEBogHYAf4BAAGoAd4B/gEAAbcB6AH+AQABzgH2
+        Af4BPwHpAf0B/gGKAe4B8gH+AUgBWQFfAX8gAAFJAVwBYwF/AUsB4QH4Af4BGAHNAfQB/gEBAb4B7wH+
+        AQABrwHgAf4BAAGgAdMB/gEBAZgBywH+AQEBlwHMAf4BAQGdAdIB/gEBAaIB2AH+AQABqAHeAf4BAAG3
+        AegB/gEAAc4B9gH+AT8B6QH9Af4BigHuAfIB/gFIAVkBXwF/4AABSgFeAWYBfwFMAeEB+AH+ARgBzgH1
+        Af8BAQG/Ae8B/wECAa4B4AH+AQEBoQHUAf8BAQGZAcwB/wEBAZkBzAH/AQIBnQHRAf4BAQGkAdgB/wEC
+        AacB3QH+AQEBuAHoAf8BAAHOAfYB/wE/AekB/AH+AYsB7wHzAf8BSQFbAWEBfyAAAUoBXgFmAX8BTAHh
+        AfgB/gEYAc4B9QH/AQEBvwHvAf8BAgGuAeAB/gEBAaEB1AH/AQEBmQHMAf8BAQGZAcwB/wECAZ0B0QH+
+        AQEBpAHYAf8BAgGnAd0B/gEBAbgB6AH/AQABzgH2Af8BPwHpAfwB/gGLAe8B8wH/AUkBWwFhAX/gAAFK
+        AV4BZgF/AUwB4QH4Af4BGAHNAfQB/wECAb4B7gH/AQMBrQHeAf4BAgGhAdIB/wECAZkBywH/AQMBmAHL
+        Af8BAwGcAdAB/gECAaIB1gH/AQMBpgHbAf4BAQG3AecB/wEBAc4B9QH/AUAB6AH8Af4BiwHuAfMB/wFJ
+        AVsBYQF/IAABSgFeAWYBfwFMAeEB+AH+ARgBzQH0Af8BAgG+Ae4B/wEDAa0B3gH+AQIBoQHSAf8BAgGZ
+        AcsB/wEDAZgBywH/AQMBnAHQAf4BAgGiAdYB/wEDAaYB2wH+AQEBtwHnAf8BAQHOAfUB/wFAAegB/AH+
+        AYsB7gHzAf8BSQFbAWEBf+AAAUoBXgFmAX8BTAHhAfgB/gEZAcwB8wH+AQQBvQHtAf4BAwGuAd4B/gEE
+        AaAB0QH+AQQBlwHIAf4BBAGXAckB/gEEAZwBzwH+AQQBoQHUAf4BBAGmAdoB/gEDAbUB5QH+AQIBzAHz
+        Af4BQAHoAfwB/gGKAe0B8gH+AUkBWwFhAX8gAAFKAV4BZgF/AUwB4QH4Af4BGQHMAfMB/gEEAb0B7QH+
+        AQMBrgHeAf4BBAGgAdEB/gEEAZcByAH+AQQBlwHJAf4BBAGcAc8B/gEEAaEB1AH+AQQBpgHaAf4BAwG1
+        AeUB/gECAcwB8wH+AUAB6AH8Af4BigHtAfIB/gFJAVsBYQF/4AABSgFeAWYBfwFMAeEB+AH+ARgBzQH0
+        Af8BAQG+Ae8B/wECAa4B3wH+AQEBoQHTAf8BAQGZAcwB/wECAZgBzAH/AQMBnQHQAf4BAgGjAdYB/wEE
+        AaYB2wH+AQIBtgHmAf8BAgHNAfQB/wFAAecB+wH+AYoB7gHyAf8BSQFbAWEBfyAAAUoBXgFmAX8BTAHh
+        AfgB/gEYAc0B9AH/AQEBvgHvAf8BAgGuAd8B/gEBAaEB0wH/AQEBmQHMAf8BAgGYAcwB/wEDAZ0B0AH+
+        AQIBowHWAf8BBAGmAdsB/gECAbYB5gH/AQIBzQH0Af8BQAHnAfsB/gGKAe4B8gH/AUkBWwFhAX/gAAFK
+        AV4BZgF/AUwB4QH4Af4BGQHNAfQB/wEDAb4B7gH/AQMBrgHeAf4BAwGhAdMB/wEDAZkBywH/AQMBmAHL
+        Af8BBAGdAdAB/gEDAaMB1gH/AQMBpwHcAf4BAgG3AecB/wEBAc4B9QH/AUAB6AH8Af4BigHuAfMB/wFJ
+        AVsBYQF/IAABSgFeAWYBfwFMAeEB+AH+ARkBzQH0Af8BAwG+Ae4B/wEDAa4B3gH+AQMBoQHTAf8BAwGZ
+        AcsB/wEDAZgBywH/AQQBnQHQAf4BAwGjAdYB/wEDAacB3AH+AQIBtwHnAf8BAQHOAfUB/wFAAegB/AH+
+        AYoB7gHzAf8BSQFbAWEBf+AAAUoBXgFmAX8BTAHhAfgB/gEaAcwB8wH+AQQBvQHsAf4BAwGuAd0B/gED
+        AZ8B0QH+AQMBlwHJAf4BBAGXAckB/gEEAZwBzwH+AQUBoQHVAf4BBQGmAdoB/gEEAbUB5AH+AQMBzAHy
+        Af4BQQHnAfsB/gGKAe0B8QH+AUkBWwFhAX8gAAFKAV4BZgF/AUwB4QH4Af4BGgHMAfMB/gEEAb0B7AH+
+        AQMBrgHdAf4BAwGfAdEB/gEDAZcByQH+AQQBlwHJAf4BBAGcAc8B/gEFAaEB1QH+AQUBpgHaAf4BBAG1
+        AeQB/gEDAcwB8gH+AUEB5wH7Af4BigHtAfEB/gFJAVsBYQF/4AABSgFeAWYBfwFMAeAB+AH+ARkBzAHz
+        Af8BAwG9AewB/wEDAa0B3AH+AQMBoAHRAf8BAwGYAcoB/wEDAZcByQH/AQQBnAHPAf4BAwGhAdUB/wEE
+        AaUB2QH+AQMBtQHkAf8BAgHMAfIB/wFAAeYB+gH+AYoB7QHxAf8BSQFbAWEBfyAAAUoBXgFmAX8BTAHg
+        AfgB/gEZAcwB8wH/AQMBvQHsAf8BAwGtAdwB/gEDAaAB0QH/AQMBmAHKAf8BAwGXAckB/wEEAZwBzwH+
+        AQMBoQHVAf8BBAGlAdkB/gEDAbUB5AH/AQIBzAHyAf8BQAHmAfoB/gGKAe0B8QH/AUkBWwFhAX/gAAFK
+        AV4BZgF/AUwB4QH4Af4BGAHNAfQB/wEDAb4B7gH/AQMBrgHeAf4BAgGhAdMB/wEDAZkBywH/AQMBmQHL
+        Af8BBQGdAc8B/gEEAaMB1gH/AQQBpwHbAf4BAwG3AeYB/wECAc0B9AH/AUAB6AH7Af4BiwHuAfIB/wFJ
+        AVsBYQF/IAABSgFeAWYBfwFMAeEB+AH+ARgBzQH0Af8BAwG+Ae4B/wEDAa4B3gH+AQIBoQHTAf8BAwGZ
+        AcsB/wEDAZkBywH/AQUBnQHPAf4BBAGjAdYB/wEEAacB2wH+AQMBtwHmAf8BAgHNAfQB/wFAAegB+wH+
+        AYsB7gHyAf8BSQFbAWEBf+AAAUoBXgFmAX8BTAHgAfcB/gEaAcwB8wH/AQQBvQHsAf8BBQGtAdwB/gEE
+        AaAB0QH/AQQBmAHJAf8BBQGXAcgB/wEHAZsBzQH+AQYBoQHUAf8BBwGlAdkB/gEFAbYB5QH/AQMBzQHy
+        Af8BQQHnAfoB/gGKAe4B8gH/AUkBWwFhAX8gAAFKAV4BZgF/AUwB4AH3Af4BGgHMAfMB/wEEAb0B7AH/
+        AQUBrQHcAf4BBAGgAdEB/wEEAZgByQH/AQUBlwHIAf8BBwGbAc0B/gEGAaEB1AH/AQcBpQHZAf4BBQG2
+        AeUB/wEDAc0B8gH/AUEB5wH6Af4BigHuAfIB/wFJAVsBYQF/4AABSgFeAWYBfwFLAeEB+AH+AR8BygHx
+        Af4BFwG3AeUB/gEbAaYB0wH+AR0BlwHEAf4BGwGMAbkB/gEYAYcBswH+ARcBiQG2Af4BGgGQAb4B/gEc
+        AZkBxwH+ARoBqgHXAf4BFgHDAegB/gFFAeMB9wH+AYkB7AHxAf4BSQFbAWEBfyAAAUoBXgFmAX8BSwHh
+        AfgB/gEfAcoB8QH+ARcBtwHlAf4BGwGmAdMB/gEdAZcBxAH+ARsBjAG5Af4BGAGHAbMB/gEXAYkBtgH+
+        ARoBkAG+Af4BHAGZAccB/gEaAaoB1wH+ARYBwwHoAf4BRQHjAfcB/gGJAewB8QH+AUkBWwFhAX/gAAEs
+        ATEBMwE/AU4BZQFsAX8BkwGvAcEB/wGTAa8BwQH/AVsBagFzAZkBSAFWAV8BfwFFAVMBXAF/AUIBUAFZ
+        AX8BQQFQAVkBfwFDAVIBWwF/AUYBVQFdAX8BSgFYAWABfwFNAVsBYwF/AVABXwFoAX8BUwFmAWsBfwEs
+        ATEBMgE/IAABLAExATMBPwFOAWUBbAF/AZMBrwHBAf8BkwGvAcEB/wFbAWoBcwGZAUgBVgFfAX8BRQFT
+        AVwBfwFCAVABWQF/AUEBUAFZAX8BQwFSAVsBfwFGAVUBXQF/AVcBZwFwAZkBgAGcAa0B/wGbAbcByAH+
+        AVUBZgFrAX8BLAExATIBP+gAA7IB/gO2Af4CKAEpATNUAAOyAf4DtgH+AykBNBgAAygBNAOXAf4DxQH+
+        8AADswH/A6wB/wMoATNUAAOzAf8DrAH/AykBNBgAAygBNAORAf8DxQH+8AADswH/A6AB/wMoATNUAAOz
+        Af8DoAH/AykBNBgAAygBNAOKAf8DxQH+8AADsgH9A5gB/gMuATsYAAMjAS8DZQG/A34BvTAAA7IB/QOY
+        Af4DLgE8GAADLQE8A4YB/gPJAf3wAAOdAdsDogH/A1UBdBgAA1IBdAOSAf8DswHbMAADnQHbA6IB/wNV
+        AXQYAANSAXQDkQH/A7MB2/AAA2kBjAOxAf8DlgHnAxUBGhAAAxQBGgOOAecDrAH/A3EBjDAAA2kBjAOx
+        Af8DlgHnAxUBGhAAAxUBGwOOAecDrAH/A3ABi/AAAxMBGAOwAewDpAH+A5kB4ANDAVcDDAEPAwwBDwNA
+        AVcDjgHfA4wB/gPBAe0DEwEYMAADEwEYA7AB7AOlAf4DlwHfA0IBVgMMAQ8DDAEPA0ABVgOOAd8DjQH+
+        A8EB7AMTARj0AAM0AUIDtQHzA68B/wOeAf8DnQH/A5kB/gOSAf8DogH+A8IB8wM1AUI4AAM0AUIDtQHz
+        A64B/wOeAf8DnQH/A5kB/gOSAf8DogH+A8EB8wM1AUL8AAMgASgDiAGyA8MB+wPFAf8DyQH+A8sB+wOI
+        AbIDIAEoQAADIAEoA4gBsgPDAfsDxQH/A8cB/gPLAfsDiAGyAyABKP8ACQADDQERAysBNwMrATcDDQER
+        UAADDQERAysBNwMrATcDDQER6AABQgFNAT4HAAE+AwABKAMAAWADAAEYAwABAQEAAQEFAAEgAQEWAAP/
+        AQABgAEAAQEBgAEAAQEGAAGAAQABAQGAAQABAQYAAfABAAEPAfABAAEPBgAB8AEAAQ8B8AEAAQ8GAAHw
+        AQABDwHwAQABDwYAAfABAAEPAfABAAEPBgAB8AEAAQ8B8AEAAQ8GAAHwAQABDwHwAQABDwYAAfABAAEP
+        AfABAAEPBgAB8AEAAQ8B8AEAAQ8GAAHwAQABDwHwAQABDwYAAfABAAEPAfABAAEPBgAB8AEAAQ8B8AEA
+        AQ8GAAHwAQABDwHwAQABDwYAAfwBfwH/AfwBfgE/BgAB/AF/Af8B/AF+AT8GAAH8AX8B/wH8AX4BPwYA
+        AfwBfgE/AfwBfgE/BgAB/AF+AT8B/AF+AT8GAAH8ATwBPwH8ATwBPwYAAfwBAAE/AfwBAAE/BgAB/gEA
+        AX8B/gEAAX8GAAH/AQAC/wEAAf8GAAH/AcMC/wHDAf8GAAs=
+</value>
+  </data>
   <data name="lvwLoad.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
@@ -319,10 +407,10 @@
     <value>298, 17</value>
   </metadata>
   <data name="ofdDecFile.Filter" xml:space="preserve">
-    <value>Encrypted Files|*.aesx|Text Files|*.txt|All Files|*.*</value>
+    <value>Encrypted Files|*.aesx|All Files|*.*</value>
   </data>
   <data name="ofdDecFile.Title" xml:space="preserve">
-    <value>Decryption: Text/File</value>
+    <value>CAESAR</value>
   </data>
   <data name="btnOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>225, 179</value>
@@ -363,10 +451,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>CAESAR</value>
   </data>
-  <data name="&gt;&gt;ofdEncWholeFile.Name" xml:space="preserve">
-    <value>ofdEncWholeFile</value>
+  <data name="&gt;&gt;ofdEncFile.Name" xml:space="preserve">
+    <value>ofdEncFile</value>
   </data>
-  <data name="&gt;&gt;ofdEncWholeFile.Type" xml:space="preserve">
+  <data name="&gt;&gt;ofdEncFile.Type" xml:space="preserve">
     <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;chFile.Name" xml:space="preserve">
@@ -392,6 +480,12 @@
   </data>
   <data name="&gt;&gt;ofdDecFile.Type" xml:space="preserve">
     <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;icoList.Name" xml:space="preserve">
+    <value>icoList</value>
+  </data>
+  <data name="&gt;&gt;icoList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>frmCrypto</value>

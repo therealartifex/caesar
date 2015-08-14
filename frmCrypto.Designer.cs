@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using CAESAR.Properties;
 
 namespace CAESAR
 {
@@ -30,9 +31,10 @@ namespace CAESAR
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCrypto));
             this.btnChPass = new System.Windows.Forms.Button();
-            this.ofdEncWholeFile = new System.Windows.Forms.OpenFileDialog();
+            this.ofdEncFile = new System.Windows.Forms.OpenFileDialog();
             this.btnLoadDec = new System.Windows.Forms.Button();
             this.btnLoadEnc = new System.Windows.Forms.Button();
             this.btnProc = new System.Windows.Forms.Button();
@@ -44,6 +46,7 @@ namespace CAESAR
             this.btnProcFolder = new System.Windows.Forms.Button();
             this.ofdDecFile = new System.Windows.Forms.OpenFileDialog();
             this.btnOptions = new System.Windows.Forms.Button();
+            this.icoList = new System.Windows.Forms.ImageList(this.components);
             this.SuspendLayout();
             // 
             // btnChPass
@@ -53,12 +56,11 @@ namespace CAESAR
             this.btnChPass.UseVisualStyleBackColor = true;
             this.btnChPass.Click += new System.EventHandler(this.btnChPass_Click);
             // 
-            // ofdEncWholeFile
+            // ofdEncFile
             // 
-            this.ofdEncWholeFile.DefaultExt = "txt";
-            resources.ApplyResources(this.ofdEncWholeFile, "ofdEncWholeFile");
-            this.ofdEncWholeFile.Multiselect = true;
-            this.ofdEncWholeFile.FileOk += new System.ComponentModel.CancelEventHandler(this.ofdEncWholeFile_FileOk);
+            resources.ApplyResources(this.ofdEncFile, "ofdEncFile");
+            this.ofdEncFile.Multiselect = true;
+            this.ofdEncFile.FileOk += new System.ComponentModel.CancelEventHandler(this.ofdEncFile_FileOk);
             // 
             // btnLoadDec
             // 
@@ -91,6 +93,7 @@ namespace CAESAR
             this.lvwLoad.FullRowSelect = true;
             this.lvwLoad.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.lvwLoad.Name = "lvwLoad";
+            this.lvwLoad.SmallImageList = this.icoList;
             this.lvwLoad.UseCompatibleStateImageBehavior = false;
             this.lvwLoad.View = System.Windows.Forms.View.Details;
             // 
@@ -131,6 +134,13 @@ namespace CAESAR
             this.btnOptions.UseVisualStyleBackColor = true;
             this.btnOptions.Click += new System.EventHandler(this.btnOptions_Click);
             // 
+            // icoList
+            // 
+            this.icoList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("icoList.ImageStream")));
+            this.icoList.TransparentColor = System.Drawing.Color.Transparent;
+            this.icoList.Images.SetKeyName(0, "dec");
+            this.icoList.Images.SetKeyName(1, "enc");
+            // 
             // frmCrypto
             // 
             resources.ApplyResources(this, "$this");
@@ -147,7 +157,6 @@ namespace CAESAR
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "frmCrypto";
-            this.Load += new System.EventHandler(this.frmCrypto_Load);
             this.ResumeLayout(false);
 
         }
@@ -155,7 +164,7 @@ namespace CAESAR
         #endregion
         private Button btnChPass;
         private OpenFileDialog ofdDecFile;
-        private OpenFileDialog ofdEncWholeFile;
+        private OpenFileDialog ofdEncFile;
         private Button btnLoadDec;
         private Button btnLoadEnc;
         private Button btnProc;
@@ -166,5 +175,7 @@ namespace CAESAR
         private Button btnProcFolder;
         private FolderBrowserDialog fbdSelect;
         private Button btnOptions;
+        //private readonly ImageList icoList = new ImageList();
+        private ImageList icoList;
     }
 }

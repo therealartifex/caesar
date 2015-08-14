@@ -42,7 +42,7 @@ namespace CAESAR
         public string SimpleEncrypt(string secretMessage, byte[] cryptKey, byte[] authKey, byte[] nonSecretPayload = null)
         {
             if (string.IsNullOrEmpty(secretMessage))
-                throw new ArgumentException(@"Secret Message Required!", "secretMessage");
+                throw new ArgumentException(@"Secret Message Required!", nameof(secretMessage));
 
             var plainText = Encoding.UTF8.GetBytes(secretMessage);
             var cipherText = SimpleEncrypt(plainText, cryptKey, authKey, nonSecretPayload);
@@ -63,7 +63,7 @@ namespace CAESAR
         public string SimpleDecrypt(string encryptedMessage, byte[] cryptKey, byte[] authKey, int nonSecretPayloadLength = 0)
         {
             if (string.IsNullOrWhiteSpace(encryptedMessage))
-                throw new ArgumentException(@"Encrypted Message Required!", "encryptedMessage");
+                throw new ArgumentException(@"Encrypted Message Required!", nameof(encryptedMessage));
 
             var cipherText = Convert.FromBase64String(encryptedMessage);
             var plaintext = SimpleDecrypt(cipherText, cryptKey, authKey, nonSecretPayloadLength);
@@ -88,7 +88,7 @@ namespace CAESAR
         public string SimpleEncryptWithPassword(string secretMessage, string password, byte[] nonSecretPayload = null)
         {
             if (string.IsNullOrEmpty(secretMessage))
-                throw new ArgumentException(@"Secret Message Required!", "secretMessage");
+                throw new ArgumentException(@"Secret Message Required!", nameof(secretMessage));
 
             var plainText = Encoding.UTF8.GetBytes(secretMessage);
             var cipherText = SimpleEncryptWithPassword(plainText, password, nonSecretPayload);
@@ -112,7 +112,7 @@ namespace CAESAR
         public string SimpleDecryptWithPassword(string encryptedMessage, string password, int nonSecretPayloadLength = 0)
         {
             if (string.IsNullOrWhiteSpace(encryptedMessage))
-                throw new ArgumentException(@"Encrypted Message Required!", "encryptedMessage");
+                throw new ArgumentException(@"Encrypted Message Required!", nameof(encryptedMessage));
 
             var cipherText = Convert.FromBase64String(encryptedMessage);
             var plainText = SimpleDecryptWithPassword(cipherText, password, nonSecretPayloadLength);
@@ -123,13 +123,13 @@ namespace CAESAR
         {
             //User Error Checks
             if (cryptKey == null || cryptKey.Length != KeyBitSize / 8)
-                throw new ArgumentException(String.Format("Key needs to be {0} bit!", KeyBitSize), "cryptKey");
+                throw new ArgumentException($"Key needs to be {KeyBitSize} bit!", nameof(cryptKey));
 
             if (authKey == null || authKey.Length != KeyBitSize / 8)
-                throw new ArgumentException(String.Format("Key needs to be {0} bit!", KeyBitSize), "authKey");
+                throw new ArgumentException($"Key needs to be {KeyBitSize} bit!", nameof(authKey));
 
             if (secretMessage == null || secretMessage.Length < 1)
-                throw new ArgumentException(@"Secret Message Required!", "secretMessage");
+                throw new ArgumentException(@"Secret Message Required!", nameof(secretMessage));
 
             //non-secret payload optional
             nonSecretPayload = nonSecretPayload ?? new byte[] { };
@@ -187,13 +187,13 @@ namespace CAESAR
 
             //Basic Usage Error Checks
             if (cryptKey == null || cryptKey.Length != KeyBitSize / 8)
-                throw new ArgumentException(String.Format("CryptKey needs to be {0} bit!", KeyBitSize), "cryptKey");
+                throw new ArgumentException($"CryptKey needs to be {KeyBitSize} bit!", nameof(cryptKey));
 
             if (authKey == null || authKey.Length != KeyBitSize / 8)
-                throw new ArgumentException(String.Format("AuthKey needs to be {0} bit!", KeyBitSize), "authKey");
+                throw new ArgumentException($"AuthKey needs to be {KeyBitSize} bit!", nameof(authKey));
 
             if (encryptedMessage == null || encryptedMessage.Length == 0)
-                throw new ArgumentException(@"Encrypted Message Required!", "encryptedMessage");
+                throw new ArgumentException(@"Encrypted Message Required!", nameof(encryptedMessage));
 
             using (var hmac = new HMACSHA256(authKey))
             {
@@ -250,10 +250,10 @@ namespace CAESAR
 
             //User Error Checks
             if (string.IsNullOrWhiteSpace(password) || password.Length < MinPasswordLength)
-                throw new ArgumentException(String.Format("Must have a password of at least {0} characters!", MinPasswordLength), "password");
+                throw new ArgumentException($"Must have a password of at least {MinPasswordLength} characters!", nameof(password));
 
-            if (secretMessage == null || secretMessage.Length == 0)
-                throw new ArgumentException(@"Secret Message Required!", "secretMessage");
+            if (secretMessage?.Length == 0)
+                throw new ArgumentException(@"Secret Message Required!", nameof(secretMessage));
 
             var payload = new byte[((SaltBitSize / 8) * 2) + nonSecretPayload.Length];
 
@@ -295,10 +295,10 @@ namespace CAESAR
         {
             //User Error Checks
             if (string.IsNullOrWhiteSpace(password) || password.Length < MinPasswordLength)
-                throw new ArgumentException(String.Format("Must have a password of at least {0} characters!", MinPasswordLength), "password");
+                throw new ArgumentException($"Must have a password of at least {MinPasswordLength} characters!", nameof(password));
 
             if (encryptedMessage == null || encryptedMessage.Length == 0)
-                throw new ArgumentException(@"Encrypted Message Required!", "encryptedMessage");
+                throw new ArgumentException(@"Encrypted Message Required!", nameof(encryptedMessage));
 
             var cryptSalt = new byte[SaltBitSize / 8];
             var authSalt = new byte[SaltBitSize / 8];

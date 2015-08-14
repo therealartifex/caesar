@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.IO;
+using System.Windows.Forms;
 using System.Linq;
 using System.Text;
 using System.Web.Security;
@@ -24,12 +25,12 @@ namespace CAESAR
             {
                 case DialogResult.Yes:
 
-                    foreach (var f in System.IO.Directory.GetFiles(fbdSelect.SelectedPath)) lvwLoad.Items.Add(new ListViewItem(new[] {f, Resources.EncryptProperty }));
+                    foreach (var f in Directory.GetFiles(fbdSelect.SelectedPath, "*", SearchOption.AllDirectories)) lvwLoad.Items.Add(new ListViewItem(new[] {f, Resources.EncryptProperty}, 1));
                     break;
 						
                 case DialogResult.No:
 
-                    foreach (var f in System.IO.Directory.GetFiles(fbdSelect.SelectedPath)) lvwLoad.Items.Add(new ListViewItem(new[] {f, Resources.DecryptProperty}));
+                    foreach (var f in Directory.GetFiles(fbdSelect.SelectedPath, "*", SearchOption.AllDirectories)) lvwLoad.Items.Add(new ListViewItem(new[] {f, Resources.DecryptProperty}, 0));
                     break;
 
                 case DialogResult.Cancel:
@@ -38,13 +39,18 @@ namespace CAESAR
             MessageBoxManager.Unregister();
         }
 
-        private void btnLoadEnc_Click(object sender, System.EventArgs e) { ofdEncWholeFile.ShowDialog(); }
+        private void btnLoadEnc_Click(object sender, System.EventArgs e) { ofdEncFile.ShowDialog(); }
 
         public void btnLoadDec_Click(object sender, System.EventArgs e) { ofdDecFile.ShowDialog(); }
 
         private void ofdDecFile_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            foreach (var f in ofdDecFile.FileNames) lvwLoad.Items.Add(new ListViewItem(new[] {f, Resources.DecryptProperty}));
+            foreach (var f in ofdDecFile.FileNames) lvwLoad.Items.Add(new ListViewItem(new[] {f, Resources.DecryptProperty}, 0));
+        }
+
+        private void ofdEncFile_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            foreach (var f in ofdEncFile.FileNames) lvwLoad.Items.Add(new ListViewItem(new[] { f, Resources.EncryptProperty }, 1));
         }
 
         private void btnProc_Click(object sender, System.EventArgs e)
@@ -80,7 +86,7 @@ namespace CAESAR
         // TODO: Implement decryption method
         private void ProcDecrypt()
         {
-            var decryptFiles = lvwLoad.Items.Cast<ListViewItem>().Where(i => i.SubItems[1].Text == Resources.DecryptProperty).Select(_ => _.Text);
+            //var decryptFiles = lvwLoad.Items.Cast<ListViewItem>().Where(i => i.SubItems[1].Text == Resources.DecryptProperty).Select(_ => _.Text);
         }
 
         private void btnRemove_Click(object sender, System.EventArgs e)
@@ -94,19 +100,15 @@ namespace CAESAR
         // TODO: Build Options dialog
         private void btnOptions_Click(object sender, System.EventArgs e)
         {
-            var tfa = new TwoFactorAuthenticator();
-            var info = tfa.GenerateSetupCode("CAESAR",
-                Encoding.ASCII.GetString(
-                ProtectedData.Unprotect(
-                System.IO.File.ReadAllBytes(@"tfbin"), null, DataProtectionScope.CurrentUser)), 300, 300);
-            MessageBox.Show(Resources.MessageAccountCode + info.ManualEntryKey, Resources.MessageBoxCaption, MessageBoxButtons.OK);
+            var optf = new frmOptions();
+            optf.ShowDialog(this);
         }
 
 
         // TODO: Finish encryption method
         private void ProcEncrypt()
         {
-            var encryptFiles = lvwLoad.Items.Cast<ListViewItem>().Where(i => i.SubItems[1].Text == Resources.EncryptProperty).Select(_ => _.Text);
+            //var encryptFiles = lvwLoad.Items.Cast<ListViewItem>().Where(i => i.SubItems[1].Text == Resources.EncryptProperty).Select(_ => _.Text);
         }
 
         private void btnChPass_Click(object sender, System.EventArgs e)
@@ -116,7 +118,7 @@ namespace CAESAR
                 case DialogResult.OK:
                     string accountCode = Membership.GeneratePassword(16, 6);
                     byte[] key = Encoding.ASCII.GetBytes(accountCode);
-                    System.IO.File.WriteAllBytes(@"tfbin", ProtectedData.Protect(key, null, DataProtectionScope.CurrentUser));
+                    File.WriteAllBytes(@"tfbin", ProtectedData.Protect(key, null, DataProtectionScope.CurrentUser));
 
                     var tfa = new TwoFactorAuthenticator();
                     var info = tfa.GenerateSetupCode("CAESAR", accountCode, 300, 300);
@@ -129,14 +131,5 @@ namespace CAESAR
             }
         }
 
-        private void ofdEncWholeFile_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-
-        }
-
-        private void frmCrypto_Load(object sender, System.EventArgs e)
-        {
-            
-        }
     }
 }
