@@ -33,14 +33,16 @@ namespace CAESAR
             this.btnClose = new System.Windows.Forms.Button();
             this.chkLogs = new System.Windows.Forms.CheckBox();
             this.chkObfuscate = new System.Windows.Forms.CheckBox();
+            this.btnChangeCode = new System.Windows.Forms.Button();
+            this.btnBackup = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnClose
             // 
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.Location = new System.Drawing.Point(155, 83);
+            this.btnClose.Location = new System.Drawing.Point(159, 109);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(67, 23);
+            this.btnClose.Size = new System.Drawing.Size(75, 23);
             this.btnClose.TabIndex = 0;
             this.btnClose.Text = "Close";
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
@@ -69,12 +71,34 @@ namespace CAESAR
             this.chkObfuscate.Text = "Obfuscate filename on encrypt";
             this.chkObfuscate.UseVisualStyleBackColor = true;
             // 
+            // btnChangeCode
+            // 
+            this.btnChangeCode.Location = new System.Drawing.Point(12, 58);
+            this.btnChangeCode.Name = "btnChangeCode";
+            this.btnChangeCode.Size = new System.Drawing.Size(86, 34);
+            this.btnChangeCode.TabIndex = 4;
+            this.btnChangeCode.Text = "Change Account Code";
+            this.btnChangeCode.UseVisualStyleBackColor = true;
+            // 
+            // btnBackup
+            // 
+            this.btnBackup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBackup.Location = new System.Drawing.Point(148, 58);
+            this.btnBackup.Name = "btnBackup";
+            this.btnBackup.Size = new System.Drawing.Size(86, 34);
+            this.btnBackup.TabIndex = 5;
+            this.btnBackup.Text = "Back Up Data";
+            this.btnBackup.UseVisualStyleBackColor = true;
+            this.btnBackup.Visible = false;
+            // 
             // frmOptions
             // 
             this.AcceptButton = this.btnClose;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(234, 118);
+            this.ClientSize = new System.Drawing.Size(246, 144);
+            this.Controls.Add(this.btnBackup);
+            this.Controls.Add(this.btnChangeCode);
             this.Controls.Add(this.chkLogs);
             this.Controls.Add(this.chkObfuscate);
             this.Controls.Add(this.btnClose);
@@ -93,5 +117,7 @@ namespace CAESAR
         private Button btnClose;
         private CheckBox chkObfuscate;
         private CheckBox chkLogs;
+        private Button btnChangeCode;
+        private Button btnBackup;
     }
 }
