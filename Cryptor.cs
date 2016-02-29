@@ -200,7 +200,7 @@ namespace CAESAR
                 var sentTag = new byte[hmac.HashSize / 8];
                 //Calculate Tag
                 var calcTag = hmac.ComputeHash(encryptedMessage, 0, encryptedMessage.Length - sentTag.Length);
-                var ivLength = (BlockBitSize / 8);
+                var ivLength = BlockBitSize / 8;
 
                 //if message length is to small just return null
                 if (encryptedMessage.Length < sentTag.Length + nonSecretPayloadLength + ivLength)
@@ -255,7 +255,7 @@ namespace CAESAR
             if (secretMessage?.Length == 0)
                 throw new ArgumentException(@"Secret Message Required!", nameof(secretMessage));
 
-            var payload = new byte[((SaltBitSize / 8) * 2) + nonSecretPayload.Length];
+            var payload = new byte[SaltBitSize / 8 * 2 + nonSecretPayload.Length];
 
             Array.Copy(nonSecretPayload, payload, nonSecretPayload.Length);
             int payloadIndex = nonSecretPayload.Length;
