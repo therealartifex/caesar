@@ -1,19 +1,18 @@
 ﻿using System;
 using System.IO;
 using System.Security.Cryptography;
-using System.Text;
 
 namespace CAESAR
 {
     public class Cryptor
     {
         private readonly RandomNumberGenerator Random = RandomNumberGenerator.Create();
-        public readonly int BlockBitSize = 256;
-        public readonly int KeyBitSize = 256;
-        public readonly int SaltBitSize = 64;
-        public readonly int Iterations = 1000000;
-        public readonly int MinPasswordLength = 12;
-
+        private const int BlockBitSize = 256;
+        private const int KeyBitSize = 256;
+        private const int SaltBitSize = 64;
+        private const int Iterations = 1000000;
+        private const int MinPasswordLength = 16;
+        
         /// <summary>
         /// Helper that generates a random key on each call.
         /// </summary>
@@ -25,111 +24,14 @@ namespace CAESAR
             return key;
         }
 
-        /// <summary>
-        /// Encryption (AES) then Authentication (HMAC) for a UTF8 Message.
-        /// </summary>
-        /// <param name="secretMessage">The secret message.</param>
-        /// <param name="cryptKey">The crypt key.</param>
-        /// <param name="authKey">The auth key.</param>
-        /// <param name="nonSecretPayload">(Optional) Non-Secret Payload.</param>
-        /// <returns>
-        /// Encrypted Message
-        /// </returns>
-        /// <exception cref="System.ArgumentException">Secret Message Required!;secretMessage</exception>
-        /// <remarks>
-        /// Adds overhead of (Optional-Payload + BlockSize(16) + Message-Padded-To-Blocksize +  HMac-Tag(32)) * 1.33 Base64
-        /// </remarks>
-        public string Encrypt(string secretMessage, byte[] cryptKey, byte[] authKey, byte[] nonSecretPayload = null)
-        {
-            if (string.IsNullOrEmpty(secretMessage))
-                throw new ArgumentException(@"Secret Message Required!", nameof(secretMessage));
-
-            var plainText = Encoding.UTF8.GetBytes(secretMessage);
-            var cipherText = Encrypt(plainText, cryptKey, authKey, nonSecretPayload);
-            return Convert.ToBase64String(cipherText);
-        }
-
-        /// <summary>
-        /// Authentication (HMAC) then Decryption (AES) for a secrets UTF8 Message.
-        /// </summary>
-        /// <param name="encryptedMessage">The encrypted message.</param>
-        /// <param name="cryptKey">The crypt key.</param>
-        /// <param name="authKey">The auth key.</param>
-        /// <param name="nonSecretPayloadLength">Length of the non secret payload.</param>
-        /// <returns>
-        /// Decrypted Message
-        /// </returns>
-        /// <exception cref="System.ArgumentException">Encrypted Message Required!;encryptedMessage</exception>
-        public string Decrypt(string encryptedMessage, byte[] cryptKey, byte[] authKey, int nonSecretPayloadLength = 0)
-        {
-            if (string.IsNullOrWhiteSpace(encryptedMessage))
-                throw new ArgumentException(@"Encrypted Message Required!", nameof(encryptedMessage));
-
-            var cipherText = Convert.FromBase64String(encryptedMessage);
-            var plaintext = Decrypt(cipherText, cryptKey, authKey, nonSecretPayloadLength);
-            return plaintext == null ? null : Encoding.UTF8.GetString(plaintext);
-        }
-
-        /// <summary>
-        /// Encryption (AES) then Authentication (HMAC) of a UTF8 message
-        /// using Keys derived from a Password (PBKDF2).
-        /// </summary>
-        /// <param name="secretMessage">The secret message.</param>
-        /// <param name="password">The password.</param>
-        /// <param name="nonSecretPayload">The non secret payload.</param>
-        /// <returns>
-        /// Encrypted Message
-        /// </returns>
-        /// <exception cref="System.ArgumentException">password</exception>
-        /// <remarks>
-        /// Significantly less secure than using random binary keys.
-        /// Adds additional non secret payload for key generation parameters.
-        /// </remarks>
-        public string EncryptWithPassword(string secretMessage, string password, byte[] nonSecretPayload = null)
-        {
-            if (string.IsNullOrEmpty(secretMessage))
-                throw new ArgumentException(@"Secret Message Required!", nameof(secretMessage));
-
-            var plainText = Encoding.UTF8.GetBytes(secretMessage);
-            var cipherText = EncryptWithPassword(plainText, password, nonSecretPayload);
-            return Convert.ToBase64String(cipherText);
-        }
-
-        /// <summary>
-        /// Authentication (HMAC) and then Descryption (AES) of a UTF8 Message
-        /// using keys derived from a password (PBKDF2). 
-        /// </summary>
-        /// <param name="encryptedMessage">The encrypted message.</param>
-        /// <param name="password">The password.</param>
-        /// <param name="nonSecretPayloadLength">Length of the non secret payload.</param>
-        /// <returns>
-        /// Decrypted Message
-        /// </returns>
-        /// <exception cref="System.ArgumentException">Encrypted Message Required!;encryptedMessage</exception>
-        /// <remarks>
-        /// Significantly less secure than using random binary keys.
-        /// </remarks>
-        public string DecryptWithPassword(string encryptedMessage, string password, int nonSecretPayloadLength = 0)
-        {
-            if (string.IsNullOrWhiteSpace(encryptedMessage))
-                throw new ArgumentException(@"Encrypted Message Required!", nameof(encryptedMessage));
-
-            var cipherText = Convert.FromBase64String(encryptedMessage);
-            var plainText = DecryptWithPassword(cipherText, password, nonSecretPayloadLength);
-            return plainText == null ? null : Encoding.UTF8.GetString(plainText);
-        }
-
         public byte[] Encrypt(byte[] secretMessage, byte[] cryptKey, byte[] authKey, byte[] nonSecretPayload = null)
         {
             //User Error Checks
-            if (cryptKey == null || cryptKey.Length != KeyBitSize / 8)
-                throw new ArgumentException($"Key needs to be {KeyBitSize} bit!", nameof(cryptKey));
+            if (cryptKey == null || cryptKey.Length != KeyBitSize / 8) throw new ArgumentException($"Key needs to be {KeyBitSize} bit!", nameof(cryptKey));
 
-            if (authKey == null || authKey.Length != KeyBitSize / 8)
-                throw new ArgumentException($"Key needs to be {KeyBitSize} bit!", nameof(authKey));
+            if (authKey == null || authKey.Length != KeyBitSize / 8) throw new ArgumentException($"Key needs to be {KeyBitSize} bit!", nameof(authKey));
 
-            if (secretMessage == null || secretMessage.Length < 1)
-                throw new ArgumentException(@"Secret Message Required!", nameof(secretMessage));
+            if (secretMessage == null || secretMessage.Length < 1) throw new ArgumentException(@"Secret Message Required!", nameof(secretMessage));
 
             //non-secret payload optional
             nonSecretPayload = nonSecretPayload ?? new byte[] { };
@@ -159,14 +61,14 @@ namespace CAESAR
             }
 
             //Assemble encrypted message and add authentication
-            using (var hmac = new HMACSHA256(authKey))
+            using (var hmac = new HMACSHA512(authKey))
             using (var encryptedStream = new MemoryStream())
             {
                 using (var binaryWriter = new BinaryWriter(encryptedStream))
                 {
-                    //Prepend non-secret payload if any
+                    //Prefix non-secret payload if any
                     binaryWriter.Write(nonSecretPayload);
-                    //Prepend IV
+                    //Prefix IV
                     binaryWriter.Write(iv);
                     //Write Ciphertext
                     binaryWriter.Write(cipherText);
@@ -174,7 +76,7 @@ namespace CAESAR
 
                     //Authenticate all data
                     var tag = hmac.ComputeHash(encryptedStream.ToArray());
-                    //Postpend tag
+                    //Postfix tag
                     binaryWriter.Write(tag);
                 }
                 return encryptedStream.ToArray();
@@ -186,16 +88,13 @@ namespace CAESAR
         {
 
             //Basic Usage Error Checks
-            if (cryptKey == null || cryptKey.Length != KeyBitSize / 8)
-                throw new ArgumentException($"CryptKey needs to be {KeyBitSize} bit!", nameof(cryptKey));
+            if (cryptKey == null || cryptKey.Length != KeyBitSize / 8) throw new ArgumentException($"CryptKey needs to be {KeyBitSize} bit!", nameof(cryptKey));
 
-            if (authKey == null || authKey.Length != KeyBitSize / 8)
-                throw new ArgumentException($"AuthKey needs to be {KeyBitSize} bit!", nameof(authKey));
+            if (authKey == null || authKey.Length != KeyBitSize / 8) throw new ArgumentException($"AuthKey needs to be {KeyBitSize} bit!", nameof(authKey));
 
-            if (encryptedMessage == null || encryptedMessage.Length == 0)
-                throw new ArgumentException(@"Encrypted Message Required!", nameof(encryptedMessage));
+            if (encryptedMessage == null || encryptedMessage.Length == 0) throw new ArgumentException(@"Encrypted Message Required!", nameof(encryptedMessage));
 
-            using (var hmac = new HMACSHA256(authKey))
+            using (var hmac = new HMACSHA512(authKey))
             {
                 var sentTag = new byte[hmac.HashSize / 8];
                 //Calculate Tag
@@ -203,20 +102,17 @@ namespace CAESAR
                 var ivLength = BlockBitSize / 8;
 
                 //if message length is to small just return null
-                if (encryptedMessage.Length < sentTag.Length + nonSecretPayloadLength + ivLength)
-                    return null;
+                if (encryptedMessage.Length < sentTag.Length + nonSecretPayloadLength + ivLength) return null;
 
                 //Grab Sent Tag
                 Array.Copy(encryptedMessage, encryptedMessage.Length - sentTag.Length, sentTag, 0, sentTag.Length);
 
                 //Compare Tag with constant time comparison
                 var compare = 0;
-                for (var i = 0; i < sentTag.Length; i++)
-                    compare |= sentTag[i] ^ calcTag[i];
+                for (var i = 0; i < sentTag.Length; i++) compare |= sentTag[i] ^ calcTag[i];
 
                 //if message doesn't authenticate return null
-                if (compare != 0)
-                    return null;
+                if (compare != 0) return null;
 
                 using (var aes = new RijndaelManaged {KeySize = KeyBitSize, BlockSize = BlockBitSize, Mode = CipherMode.CBC, Padding = PaddingMode.PKCS7})
                 {
@@ -231,11 +127,7 @@ namespace CAESAR
                         using (var binaryWriter = new BinaryWriter(decrypterStream))
                         {
                             //Decrypt Cipher Text from Message
-                            binaryWriter.Write(
-                              encryptedMessage,
-                              nonSecretPayloadLength + iv.Length,
-                              encryptedMessage.Length - nonSecretPayloadLength - iv.Length - sentTag.Length
-                            );
+                            binaryWriter.Write(encryptedMessage,nonSecretPayloadLength + iv.Length,encryptedMessage.Length - nonSecretPayloadLength - iv.Length - sentTag.Length);
                         }
                         //Return Plain Text
                         return plainTextStream.ToArray();
@@ -244,16 +136,14 @@ namespace CAESAR
             }
         }
 
-        public byte[] EncryptWithPassword(byte[] secretMessage, string password, byte[] nonSecretPayload = null)
+        public byte[] EncryptWithPassword(byte[] plaintext, string password, byte[] nonSecretPayload = null)
         {
             nonSecretPayload = nonSecretPayload ?? new byte[] { };
 
             //User Error Checks
-            if (string.IsNullOrWhiteSpace(password) || password.Length < MinPasswordLength)
-                throw new ArgumentException($"Must have a password of at least {MinPasswordLength} characters!", nameof(password));
+            if (string.IsNullOrWhiteSpace(password) || password.Length < MinPasswordLength) throw new ArgumentException($"Must have a password of at least {MinPasswordLength} characters", nameof(password));
 
-            if (secretMessage?.Length == 0)
-                throw new ArgumentException(@"Secret Message Required!", nameof(secretMessage));
+            if (plaintext?.Length == 0) throw new ArgumentException(@"Plaintext required", nameof(plaintext));
 
             var payload = new byte[SaltBitSize / 8 * 2 + nonSecretPayload.Length];
 
@@ -288,7 +178,7 @@ namespace CAESAR
                 Array.Copy(salt, 0, payload, payloadIndex, salt.Length);
             }
 
-            return Encrypt(secretMessage, cryptKey, authKey, payload);
+            return Encrypt(plaintext, cryptKey, authKey, payload);
         }
 
         public byte[] DecryptWithPassword(byte[] encryptedMessage, string password, int nonSecretPayloadLength = 0)
@@ -324,4 +214,5 @@ namespace CAESAR
             return Decrypt(encryptedMessage, cryptKey, authKey, cryptSalt.Length + authSalt.Length + nonSecretPayloadLength);
         }
     }
+
 }
