@@ -6,40 +6,30 @@ namespace CAESAR
 {
     public class Cryptor
     {
-        private readonly RandomNumberGenerator Random = RandomNumberGenerator.Create();
-        private const int BlockBitSize = 256;
-        private const int KeyBitSize = 256;
-        private const int SaltBitSize = 64;
+        // Size constants (in bytes)
+        private const int BlockSize = 32;
+        private const int KeySize = 32;
+        private const int SaltSize = 16;
+        
         private const int Iterations = 100000;
         private const int MinPasswordLength = 16;
+
+        //public Cryptor(string key)
+        //{
+            
+        //}
         
-        /// <summary>
-        /// Helper that generates a random key on each call.
-        /// </summary>
-        /// <returns></returns>
-        public byte[] NewKey()
+        public byte[] Encrypt(byte[] plaintext, byte[] cryptKey, byte[] authKey, byte[] nonSecretPayload = null)
         {
-            var key = new byte[KeyBitSize / 8];
-            Random.GetBytes(key);
-            return key;
-        }
+            if (plaintext == null || plaintext.Length < 1) throw new ArgumentException(@"Plaintext required", nameof(plaintext));
 
-        public byte[] Encrypt(byte[] secretMessage, byte[] cryptKey, byte[] authKey, byte[] nonSecretPayload = null)
-        {
-            //User Error Checks
-            if (cryptKey == null || cryptKey.Length != KeyBitSize / 8) throw new ArgumentException($"Key needs to be {KeyBitSize} bit!", nameof(cryptKey));
-
-            if (authKey == null || authKey.Length != KeyBitSize / 8) throw new ArgumentException($"Key needs to be {KeyBitSize} bit!", nameof(authKey));
-
-            if (secretMessage == null || secretMessage.Length < 1) throw new ArgumentException(@"Secret Message Required!", nameof(secretMessage));
-
-            //non-secret payload optional
+            // non-secret payload optional
             nonSecretPayload = nonSecretPayload ?? new byte[] { };
 
             byte[] cipherText;
             byte[] iv;
 
-            using (var aes = new RijndaelManaged {KeySize = KeyBitSize, BlockSize = BlockBitSize, Mode = CipherMode.CBC, Padding = PaddingMode.PKCS7})
+            using (var aes = new RijndaelManaged {KeySize = KeySize * 8, BlockSize = BlockSize * 8, Mode = CipherMode.CBC, Padding = PaddingMode.PKCS7})
             {
                 //Use random IV
                 aes.GenerateIV();
@@ -52,7 +42,7 @@ namespace CAESAR
                     using (var binaryWriter = new BinaryWriter(cryptoStream))
                     {
                         //Encrypt Data
-                        binaryWriter.Write(secretMessage);
+                        binaryWriter.Write(plaintext);
                     }
 
                     cipherText = cipherStream.ToArray();
@@ -86,12 +76,6 @@ namespace CAESAR
 
         public byte[] Decrypt(byte[] encryptedMessage, byte[] cryptKey, byte[] authKey, int nonSecretPayloadLength = 0)
         {
-
-            //Basic Usage Error Checks
-            if (cryptKey == null || cryptKey.Length != KeyBitSize / 8) throw new ArgumentException($"CryptKey needs to be {KeyBitSize} bit!", nameof(cryptKey));
-
-            if (authKey == null || authKey.Length != KeyBitSize / 8) throw new ArgumentException($"AuthKey needs to be {KeyBitSize} bit!", nameof(authKey));
-
             if (encryptedMessage == null || encryptedMessage.Length == 0) throw new ArgumentException(@"Encrypted Message Required!", nameof(encryptedMessage));
 
             using (var hmac = new HMACSHA512(authKey))
@@ -99,7 +83,7 @@ namespace CAESAR
                 var sentTag = new byte[hmac.HashSize / 8];
                 //Calculate Tag
                 var calcTag = hmac.ComputeHash(encryptedMessage, 0, encryptedMessage.Length - sentTag.Length);
-                var ivLength = BlockBitSize / 8;
+                var ivLength = BlockSize;
 
                 //if message length is to small just return null
                 if (encryptedMessage.Length < sentTag.Length + nonSecretPayloadLength + ivLength) return null;
@@ -114,7 +98,7 @@ namespace CAESAR
                 //if message doesn't authenticate return null
                 if (compare != 0) return null;
 
-                using (var aes = new RijndaelManaged {KeySize = KeyBitSize, BlockSize = BlockBitSize, Mode = CipherMode.CBC, Padding = PaddingMode.PKCS7})
+                using (var aes = new RijndaelManaged {KeySize = KeySize * 8, BlockSize = BlockSize * 8, Mode = CipherMode.CBC, Padding = PaddingMode.PKCS7})
                 {
                     //Grab IV from message
                     var iv = new byte[ivLength];
@@ -145,7 +129,7 @@ namespace CAESAR
 
             if (plaintext?.Length == 0) throw new ArgumentException(@"Plaintext required", nameof(plaintext));
 
-            var payload = new byte[SaltBitSize / 8 * 2 + nonSecretPayload.Length];
+            var payload = new byte[SaltSize * 2 + nonSecretPayload.Length];
 
             Array.Copy(nonSecretPayload, payload, nonSecretPayload.Length);
             int payloadIndex = nonSecretPayload.Length;
@@ -153,12 +137,12 @@ namespace CAESAR
             byte[] cryptKey;
             byte[] authKey;
             //Use Random Salt to prevent pre-generated weak password attacks.
-            using (var generator = new Rfc2898DeriveBytes(password, SaltBitSize / 8, Iterations))
+            using (var generator = new Rfc2898DeriveBytes(password, SaltSize, Iterations))
             {
                 var salt = generator.Salt;
 
                 //Generate Keys
-                cryptKey = generator.GetBytes(KeyBitSize / 8);
+                cryptKey = generator.GetBytes(KeySize);
 
                 //Create Non Secret Payload
                 Array.Copy(salt, 0, payload, payloadIndex, salt.Length);
@@ -167,12 +151,12 @@ namespace CAESAR
 
             //Deriving separate key, might be less efficient than using HKDF, 
             //but now compatible with RNEncryptor which had a very similar wireformat and requires less code than HKDF.
-            using (var generator = new Rfc2898DeriveBytes(password, SaltBitSize / 8, Iterations))
+            using (var generator = new Rfc2898DeriveBytes(password, SaltSize, Iterations))
             {
                 var salt = generator.Salt;
 
                 //Generate Keys
-                authKey = generator.GetBytes(KeyBitSize / 8);
+                authKey = generator.GetBytes(KeySize);
 
                 //Create Rest of Non Secret Payload
                 Array.Copy(salt, 0, payload, payloadIndex, salt.Length);
@@ -190,8 +174,8 @@ namespace CAESAR
             if (encryptedMessage == null || encryptedMessage.Length == 0)
                 throw new ArgumentException(@"Encrypted Message Required!", nameof(encryptedMessage));
 
-            var cryptSalt = new byte[SaltBitSize / 8];
-            var authSalt = new byte[SaltBitSize / 8];
+            var cryptSalt = new byte[SaltSize];
+            var authSalt = new byte[SaltSize];
 
             //Grab Salt from Non-Secret Payload
             Array.Copy(encryptedMessage, nonSecretPayloadLength, cryptSalt, 0, cryptSalt.Length);
@@ -203,12 +187,12 @@ namespace CAESAR
             //Generate crypt key
             using (var generator = new Rfc2898DeriveBytes(password, cryptSalt, Iterations))
             {
-                cryptKey = generator.GetBytes(KeyBitSize / 8);
+                cryptKey = generator.GetBytes(KeySize);
             }
             //Generate auth key
             using (var generator = new Rfc2898DeriveBytes(password, authSalt, Iterations))
             {
-                authKey = generator.GetBytes(KeyBitSize / 8);
+                authKey = generator.GetBytes(KeySize);
             }
 
             return Decrypt(encryptedMessage, cryptKey, authKey, cryptSalt.Length + authSalt.Length + nonSecretPayloadLength);
