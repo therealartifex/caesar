@@ -58,5 +58,17 @@ namespace CAESAR.Properties {
                 this["keepLog"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string tfbin {
+            get {
+                return ((string)(this["tfbin"]));
+            }
+            set {
+                this["tfbin"] = value;
+            }
+        }
     }
 }

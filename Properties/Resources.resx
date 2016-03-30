@@ -146,4 +146,7 @@
 
 </value>
   </data>
+  <data name="PromptFirstRun" xml:space="preserve">
+    <value>Welcome to CAESAR. Let's get you started with a new key.</value>
+  </data>
 </root>

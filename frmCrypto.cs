@@ -4,7 +4,9 @@ using System.Windows.Forms;
 using System.Linq;
 using System.Text;
 using System.Security.Cryptography;
+using System.Web.Security;
 using CAESAR.Properties;
+using Google.Authenticator;
 
 namespace CAESAR
 {
@@ -89,9 +91,9 @@ namespace CAESAR
         {
             var crypt = new Cryptor();
             var decryptFiles = lvwLoad.Items.Cast<ListViewItem>().Where(i => i.SubItems[1].Text == Resources.DecryptProperty).Select(_ => _.Text);
+            var key = Encoding.ASCII.GetString(ProtectedData.Unprotect(File.ReadAllBytes(@"tfbin"), null, DataProtectionScope.CurrentUser));
             foreach (var f in decryptFiles)
             {
-                var key = Encoding.ASCII.GetString(ProtectedData.Unprotect(File.ReadAllBytes(@"tfbin"), null, DataProtectionScope.CurrentUser));
                 var plaintext = crypt.DecryptWithPassword(File.ReadAllBytes(f), key);
                 File.WriteAllBytes(f, plaintext);
                 File.Move(f, f.Substring(0, f.LastIndexOf(".", StringComparison.Ordinal)));
@@ -117,12 +119,30 @@ namespace CAESAR
         {
             var crypt = new Cryptor();
             var encryptFiles = lvwLoad.Items.Cast<ListViewItem>().Where(i => i.SubItems[1].Text == Resources.EncryptProperty).Select(_ => _.Text);
+            var key = Encoding.ASCII.GetString(ProtectedData.Unprotect(File.ReadAllBytes(@"tfbin"), null, DataProtectionScope.CurrentUser));
             foreach (var f in encryptFiles)
             {
-                var key = Encoding.ASCII.GetString(ProtectedData.Unprotect(File.ReadAllBytes(@"tfbin"), null, DataProtectionScope.CurrentUser));
                 var cipherText = crypt.EncryptWithPassword(File.ReadAllBytes(f), key);
                 File.WriteAllBytes(f,cipherText);
                 File.Move(f, f + ".aesx");
+            }
+        }
+
+        private void frmCrypto_Load(object sender, EventArgs e)
+        {
+            if (Settings.Default.firstRun)
+            {
+                MessageBox.Show(Resources.PromptFirstRun, Resources.MessageBoxCaption, MessageBoxButtons.OK);
+                var accountCode = Membership.GeneratePassword(16, 6);
+                var key = Encoding.ASCII.GetBytes(accountCode);
+                File.WriteAllBytes(@"tfbin", ProtectedData.Protect(key, null, DataProtectionScope.CurrentUser));
+
+                var tfa = new TwoFactorAuthenticator();
+                var info = tfa.GenerateSetupCode("CAESAR", accountCode, 300, 300);
+
+                MessageBox.Show(Resources.MessageAccountCode + info.ManualEntryKey, Resources.MessageBoxCaption, MessageBoxButtons.OK);
+                Settings.Default.firstRun = false;
+                Settings.Default.Save();
             }
         }
     }

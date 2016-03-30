@@ -135,6 +135,15 @@ namespace CAESAR.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Welcome to CAESAR. Let&apos;s get you started with a new key..
+        /// </summary>
+        internal static string PromptFirstRun {
+            get {
+                return ResourceManager.GetString("PromptFirstRun", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want a new key? This will render all currently encrypted files indecipherable..
         /// </summary>
         internal static string PromptNewKey {
