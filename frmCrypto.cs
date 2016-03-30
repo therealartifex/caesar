@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Windows.Forms;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ namespace CAESAR
     {
         public frmCrypto() { InitializeComponent(); } 
 
-        private void btnProcFolder_Click(object sender, System.EventArgs e)
+        private void btnProcFolder_Click(object sender, EventArgs e)
         {
             if (fbdSelect.ShowDialog() != DialogResult.OK) return;
 
@@ -39,9 +40,9 @@ namespace CAESAR
             MessageBoxManager.Unregister();
         }
 
-        private void btnLoadEnc_Click(object sender, System.EventArgs e) { ofdEncFile.ShowDialog(); }
+        private void btnLoadEnc_Click(object sender, EventArgs e) { ofdEncFile.ShowDialog(); }
 
-        public void btnLoadDec_Click(object sender, System.EventArgs e) { ofdDecFile.ShowDialog(); }
+        public void btnLoadDec_Click(object sender, EventArgs e) { ofdDecFile.ShowDialog(); }
 
         private void ofdDecFile_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -53,7 +54,7 @@ namespace CAESAR
             foreach (var f in ofdEncFile.FileNames) lvwLoad.Items.Add(new ListViewItem(new[] { f, Resources.EncryptProperty }, 1));
         }
 
-        private void btnProc_Click(object sender, System.EventArgs e)
+        private void btnProc_Click(object sender, EventArgs e)
         {
             if (lvwLoad.Items.Count < 1)
             {
@@ -81,15 +82,25 @@ namespace CAESAR
             {
                 ProcEncrypt();
             }
+
+            lvwLoad.Items.Clear();
+
         }
 
-        // TODO: Implement decryption method
         private void ProcDecrypt()
         {
-            //var decryptFiles = lvwLoad.Items.Cast<ListViewItem>().Where(i => i.SubItems[1].Text == Resources.DecryptProperty).Select(_ => _.Text);
+            var crypt = new Cryptor();
+            var decryptFiles = lvwLoad.Items.Cast<ListViewItem>().Where(i => i.SubItems[1].Text == Resources.DecryptProperty).Select(_ => _.Text);
+            foreach (var f in decryptFiles)
+            {
+                var key = Encoding.ASCII.GetString(ProtectedData.Unprotect(File.ReadAllBytes(@"tfbin"), null, DataProtectionScope.CurrentUser));
+                var plaintext = crypt.DecryptWithPassword(File.ReadAllBytes(f), key);
+                File.WriteAllBytes(f, plaintext);
+                File.Move(f, f.Substring(0, f.LastIndexOf(".", StringComparison.Ordinal)));
+            }
         }
 
-        private void btnRemove_Click(object sender, System.EventArgs e)
+        private void btnRemove_Click(object sender, EventArgs e)
         {
             if (lvwLoad.SelectedItems.Count < 1)
                 MessageBox.Show(Resources.MessageNoRemove, Resources.MessageBoxCaption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -97,21 +108,27 @@ namespace CAESAR
                 foreach (ListViewItem lvi in lvwLoad.SelectedItems) lvwLoad.Items.Remove(lvi);
         }
 
-        // TODO: Build Options dialog
-        private void btnOptions_Click(object sender, System.EventArgs e)
+        private void btnOptions_Click(object sender, EventArgs e)
         {
             var optf = new frmOptions();
             optf.ShowDialog(this);
         }
 
 
-        // TODO: Finish encryption method
         private void ProcEncrypt()
         {
-            //var encryptFiles = lvwLoad.Items.Cast<ListViewItem>().Where(i => i.SubItems[1].Text == Resources.EncryptProperty).Select(_ => _.Text);
+            var crypt = new Cryptor();
+            var encryptFiles = lvwLoad.Items.Cast<ListViewItem>().Where(i => i.SubItems[1].Text == Resources.EncryptProperty).Select(_ => _.Text);
+            foreach (var f in encryptFiles)
+            {
+                var key = Encoding.ASCII.GetString(ProtectedData.Unprotect(File.ReadAllBytes(@"tfbin"), null, DataProtectionScope.CurrentUser));
+                var cipherText = crypt.EncryptWithPassword(File.ReadAllBytes(f), key);
+                File.WriteAllBytes(f,cipherText);
+                File.Move(f, f + ".aesx");
+            }
         }
 
-        private void btnChPass_Click(object sender, System.EventArgs e)
+        private void btnChPass_Click(object sender, EventArgs e)
         {
             switch (MessageBox.Show(Resources.PromptNewKey, Resources.MessageBoxCaption, MessageBoxButtons.OKCancel))
             {

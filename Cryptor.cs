@@ -10,7 +10,7 @@ namespace CAESAR
         private const int BlockBitSize = 256;
         private const int KeyBitSize = 256;
         private const int SaltBitSize = 64;
-        private const int Iterations = 1000000;
+        private const int Iterations = 100000;
         private const int MinPasswordLength = 16;
         
         /// <summary>
