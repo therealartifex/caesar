@@ -33,7 +33,6 @@ namespace CAESAR
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCrypto));
-            this.btnChPass = new System.Windows.Forms.Button();
             this.ofdEncFile = new System.Windows.Forms.OpenFileDialog();
             this.btnLoadDec = new System.Windows.Forms.Button();
             this.btnLoadEnc = new System.Windows.Forms.Button();
@@ -41,20 +40,13 @@ namespace CAESAR
             this.lvwLoad = new System.Windows.Forms.ListView();
             this.chFile = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.icoList = new System.Windows.Forms.ImageList(this.components);
             this.fbdSelect = new System.Windows.Forms.FolderBrowserDialog();
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnProcFolder = new System.Windows.Forms.Button();
             this.ofdDecFile = new System.Windows.Forms.OpenFileDialog();
             this.btnOptions = new System.Windows.Forms.Button();
-            this.icoList = new System.Windows.Forms.ImageList(this.components);
             this.SuspendLayout();
-            // 
-            // btnChPass
-            // 
-            resources.ApplyResources(this.btnChPass, "btnChPass");
-            this.btnChPass.Name = "btnChPass";
-            this.btnChPass.UseVisualStyleBackColor = true;
-            this.btnChPass.Click += new System.EventHandler(this.btnChPass_Click);
             // 
             // ofdEncFile
             // 
@@ -105,6 +97,13 @@ namespace CAESAR
             // 
             resources.ApplyResources(this.chType, "chType");
             // 
+            // icoList
+            // 
+            this.icoList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("icoList.ImageStream")));
+            this.icoList.TransparentColor = System.Drawing.Color.Transparent;
+            this.icoList.Images.SetKeyName(0, "dec");
+            this.icoList.Images.SetKeyName(1, "enc");
+            // 
             // btnRemove
             // 
             resources.ApplyResources(this.btnRemove, "btnRemove");
@@ -134,13 +133,6 @@ namespace CAESAR
             this.btnOptions.UseVisualStyleBackColor = true;
             this.btnOptions.Click += new System.EventHandler(this.btnOptions_Click);
             // 
-            // icoList
-            // 
-            this.icoList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("icoList.ImageStream")));
-            this.icoList.TransparentColor = System.Drawing.Color.Transparent;
-            this.icoList.Images.SetKeyName(0, "dec");
-            this.icoList.Images.SetKeyName(1, "enc");
-            // 
             // frmCrypto
             // 
             resources.ApplyResources(this, "$this");
@@ -149,7 +141,6 @@ namespace CAESAR
             this.Controls.Add(this.btnProc);
             this.Controls.Add(this.btnLoadEnc);
             this.Controls.Add(this.btnLoadDec);
-            this.Controls.Add(this.btnChPass);
             this.Controls.Add(this.btnProcFolder);
             this.Controls.Add(this.btnOptions);
             this.Controls.Add(this.btnRemove);
@@ -162,7 +153,6 @@ namespace CAESAR
         }
 
         #endregion
-        private Button btnChPass;
         private OpenFileDialog ofdDecFile;
         private OpenFileDialog ofdEncFile;
         private Button btnLoadDec;
