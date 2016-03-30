@@ -165,7 +165,6 @@ namespace CAESAR
         private Button btnProcFolder;
         private FolderBrowserDialog fbdSelect;
         private Button btnOptions;
-        //private readonly ImageList icoList = new ImageList();
         private ImageList icoList;
     }
 }
