@@ -2,6 +2,7 @@
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Windows.Forms;
 
 namespace CAESAR
 {
@@ -72,6 +73,7 @@ namespace CAESAR
                     //Postfix tag
                     binaryWriter.Write(tag);
                 }
+
                 return encryptedStream.ToArray();
             }
 
@@ -149,8 +151,6 @@ namespace CAESAR
                 payloadIndex += salt.Length;
             }
 
-            //Deriving separate key, might be less efficient than using HKDF, 
-            //but now compatible with RNEncryptor which had a very similar wireformat and requires less code than HKDF.
             using (var generator = new Rfc2898DeriveBytes(Encoding.ASCII.GetString(key), SaltSize, Iterations))
             {
                 var salt = generator.Salt;
@@ -161,13 +161,11 @@ namespace CAESAR
                 //Create Rest of Non Secret Payload
                 Array.Copy(salt, 0, payload, payloadIndex, salt.Length);
             }
-
             return Encrypt(plaintext, cryptKey, authKey, payload);
         }
 
         public byte[] DecryptWithPassword(byte[] encryptedMessage, int nonSecretPayloadLength = 0)
         {
-            //User Error Checks
             if (encryptedMessage == null || encryptedMessage.Length == 0) throw new ArgumentException(@"Encrypted Message Required!", nameof(encryptedMessage));
 
             var cryptSalt = new byte[SaltSize];

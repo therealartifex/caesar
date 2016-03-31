@@ -79,6 +79,7 @@ namespace CAESAR
             this.chkLogs.TabIndex = 3;
             this.chkLogs.Text = "Keep a log";
             this.chkLogs.UseVisualStyleBackColor = true;
+            this.chkLogs.Visible = false;
             // 
             // chkObfuscate
             // 
@@ -91,6 +92,7 @@ namespace CAESAR
             this.chkObfuscate.TabIndex = 2;
             this.chkObfuscate.Text = "Obfuscate filename on encrypt";
             this.chkObfuscate.UseVisualStyleBackColor = true;
+            this.chkObfuscate.Visible = false;
             // 
             // frmOptions
             // 

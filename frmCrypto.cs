@@ -89,7 +89,7 @@ namespace CAESAR
 
         private void ProcDecrypt()
         {
-            var crypt = new Cryptor(ProtectedData.Unprotect(File.ReadAllBytes(@"tfbin"), null, DataProtectionScope.CurrentUser));
+            var crypt = new Cryptor(ProtectedData.Unprotect(Convert.FromBase64String(Settings.Default.tfbin), null, DataProtectionScope.CurrentUser));
             var decryptFiles = lvwLoad.Items.Cast<ListViewItem>().Where(i => i.SubItems[1].Text == Resources.DecryptProperty).Select(_ => _.Text);
 
             foreach (var f in decryptFiles)
@@ -117,9 +117,9 @@ namespace CAESAR
 
         private void ProcEncrypt()
         {
-            var crypt = new Cryptor(ProtectedData.Unprotect(File.ReadAllBytes(@"tfbin"), null, DataProtectionScope.CurrentUser));
+            var crypt = new Cryptor(ProtectedData.Unprotect(Convert.FromBase64String(Settings.Default.tfbin), null, DataProtectionScope.CurrentUser));
             var encryptFiles = lvwLoad.Items.Cast<ListViewItem>().Where(i => i.SubItems[1].Text == Resources.EncryptProperty).Select(_ => _.Text);
-
+            
             foreach (var f in encryptFiles)
             {
                 var cipherText = crypt.EncryptWithPassword(File.ReadAllBytes(f));
@@ -135,7 +135,7 @@ namespace CAESAR
                 MessageBox.Show(Resources.PromptFirstRun, Resources.MessageBoxCaption, MessageBoxButtons.OK);
                 var accountCode = Membership.GeneratePassword(16, 6);
                 var key = Encoding.ASCII.GetBytes(accountCode);
-                File.WriteAllBytes(@"tfbin", ProtectedData.Protect(key, null, DataProtectionScope.CurrentUser));
+                Settings.Default.tfbin = Convert.ToBase64String(ProtectedData.Protect(key, null, DataProtectionScope.CurrentUser));
 
                 var tfa = new TwoFactorAuthenticator();
                 var info = tfa.GenerateSetupCode("CAESAR", accountCode, 300, 300);

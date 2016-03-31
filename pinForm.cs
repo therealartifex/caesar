@@ -1,35 +1,32 @@
-﻿using Google.Authenticator;
+﻿using System;
+using Google.Authenticator;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
+using CAESAR.Properties;
 
 namespace CAESAR
 {
     public partial class pinForm : Form
     {
-        private bool VerifyPin(string pin)
+        public pinForm()
+        {
+            InitializeComponent();
+        }
+
+        private void OK_Click(object sender, EventArgs e)
         {
             var tfa = new TwoFactorAuthenticator();
             var verified =
                 tfa.ValidateTwoFactorPIN(
                 Encoding.ASCII.GetString(
                 ProtectedData.Unprotect(
-                System.IO.File.ReadAllBytes(@"tfbin"), null, DataProtectionScope.CurrentUser)), pin);
+                Convert.FromBase64String(Settings.Default.tfbin), null, DataProtectionScope.CurrentUser)), PasswordTextBox.Text);
 
-            return verified;
+            DialogResult = verified ? DialogResult.OK : DialogResult.Abort;
         }
 
-        public pinForm()
-        {
-            InitializeComponent();
-        }
-
-        private void OK_Click(object sender, System.EventArgs e)
-        {
-            DialogResult = VerifyPin(PasswordTextBox.Text) ? DialogResult.OK : DialogResult.Abort;
-        }
-
-        private void Cancel_Click(object sender, System.EventArgs e)
+        private void Cancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
         }

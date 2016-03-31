@@ -1,4 +1,4 @@
-﻿using System.IO;
+﻿using System;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web.Security;
@@ -15,7 +15,7 @@ namespace CAESAR
             InitializeComponent();
         }
 
-        private void btnClose_Click(object sender, System.EventArgs e)
+        private void btnClose_Click(object sender, EventArgs e)
         {
             Close();
         }
@@ -25,12 +25,12 @@ namespace CAESAR
             Settings.Default.Save();
         }
 
-        private void btnChangeCode_Click(object sender, System.EventArgs e) {
+        private void btnChangeCode_Click(object sender, EventArgs e) {
             switch (MessageBox.Show(Resources.PromptNewKey, Resources.MessageBoxCaption, MessageBoxButtons.OKCancel)) {
                 case DialogResult.OK:
-                    string accountCode = Membership.GeneratePassword(16, 6);
-                    byte[] key = Encoding.ASCII.GetBytes(accountCode);
-                    File.WriteAllBytes(@"tfbin", ProtectedData.Protect(key, null, DataProtectionScope.CurrentUser));
+                    var accountCode = Membership.GeneratePassword(16, 6);
+                    var key = Encoding.ASCII.GetBytes(accountCode);
+                    Settings.Default.tfbin = Convert.ToBase64String(ProtectedData.Protect(key, null, DataProtectionScope.CurrentUser));
 
                     var tfa = new TwoFactorAuthenticator();
                     var info = tfa.GenerateSetupCode("CAESAR", accountCode, 300, 300);
