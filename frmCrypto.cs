@@ -133,14 +133,10 @@ namespace CAESAR
             if (Settings.Default.firstRun)
             {
                 MessageBox.Show(Resources.PromptFirstRun, Resources.MessageBoxCaption, MessageBoxButtons.OK);
-                var accountCode = Membership.GeneratePassword(16, 6);
-                var key = Encoding.ASCII.GetBytes(accountCode);
-                Settings.Default.tfbin = Convert.ToBase64String(ProtectedData.Protect(key, null, DataProtectionScope.CurrentUser));
 
-                var tfa = new TwoFactorAuthenticator();
-                var info = tfa.GenerateSetupCode("CAESAR", accountCode, 300, 300);
+                var actf = new frmAccountIssuer();
+                actf.ShowDialog(this);
 
-                MessageBox.Show(Resources.MessageAccountCode + info.ManualEntryKey, Resources.MessageBoxCaption, MessageBoxButtons.OK);
                 Settings.Default.firstRun = false;
                 Settings.Default.Save();
             }

@@ -53,6 +53,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cryptor.cs" />
+    <Compile Include="frmAccountIssuer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAccountIssuer.Designer.cs">
+      <DependentUpon>frmAccountIssuer.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmCrypto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,6 +80,9 @@
     <Compile Include="MessageBoxManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmAccountIssuer.resx">
+      <DependentUpon>frmAccountIssuer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmCrypto.resx">
       <DependentUpon>frmCrypto.cs</DependentUpon>
     </EmbeddedResource>
