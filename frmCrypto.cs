@@ -89,12 +89,12 @@ namespace CAESAR
 
         private void ProcDecrypt()
         {
-            var crypt = new Cryptor();
+            var crypt = new Cryptor(ProtectedData.Unprotect(File.ReadAllBytes(@"tfbin"), null, DataProtectionScope.CurrentUser));
             var decryptFiles = lvwLoad.Items.Cast<ListViewItem>().Where(i => i.SubItems[1].Text == Resources.DecryptProperty).Select(_ => _.Text);
-            var key = Encoding.ASCII.GetString(ProtectedData.Unprotect(File.ReadAllBytes(@"tfbin"), null, DataProtectionScope.CurrentUser));
+
             foreach (var f in decryptFiles)
             {
-                var plaintext = crypt.DecryptWithPassword(File.ReadAllBytes(f), key);
+                var plaintext = crypt.DecryptWithPassword(File.ReadAllBytes(f));
                 File.WriteAllBytes(f, plaintext);
                 File.Move(f, f.Substring(0, f.LastIndexOf(".", StringComparison.Ordinal)));
             }
@@ -117,12 +117,12 @@ namespace CAESAR
 
         private void ProcEncrypt()
         {
-            var crypt = new Cryptor();
+            var crypt = new Cryptor(ProtectedData.Unprotect(File.ReadAllBytes(@"tfbin"), null, DataProtectionScope.CurrentUser));
             var encryptFiles = lvwLoad.Items.Cast<ListViewItem>().Where(i => i.SubItems[1].Text == Resources.EncryptProperty).Select(_ => _.Text);
-            var key = Encoding.ASCII.GetString(ProtectedData.Unprotect(File.ReadAllBytes(@"tfbin"), null, DataProtectionScope.CurrentUser));
+
             foreach (var f in encryptFiles)
             {
-                var cipherText = crypt.EncryptWithPassword(File.ReadAllBytes(f), key);
+                var cipherText = crypt.EncryptWithPassword(File.ReadAllBytes(f));
                 File.WriteAllBytes(f,cipherText);
                 File.Move(f, f + ".aesx");
             }

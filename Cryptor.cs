@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace CAESAR
 {
@@ -11,13 +12,15 @@ namespace CAESAR
         private const int KeySize = 32;
         private const int SaltSize = 16;
         
-        private const int Iterations = 100000;
-        private const int MinPasswordLength = 16;
+        private const int Iterations = 100000; // Takes ~850ms to derive a key with PBKDF2 at 100,000 iterations
+        private const int minKeyLen = 16;
+        private readonly byte[] key;
 
-        //public Cryptor(string key)
-        //{
-            
-        //}
+        public Cryptor(byte[] key)
+        {
+            if (key.Length < minKeyLen) throw new ArgumentException($"Must have a password of at least {minKeyLen} characters", nameof(key));
+            this.key = key;
+        }
         
         public byte[] Encrypt(byte[] plaintext, byte[] cryptKey, byte[] authKey, byte[] nonSecretPayload = null)
         {
@@ -120,24 +123,21 @@ namespace CAESAR
             }
         }
 
-        public byte[] EncryptWithPassword(byte[] plaintext, string password, byte[] nonSecretPayload = null)
+        public byte[] EncryptWithPassword(byte[] plaintext, byte[] nonSecretPayload = null)
         {
             nonSecretPayload = nonSecretPayload ?? new byte[] { };
-
-            //User Error Checks
-            if (string.IsNullOrWhiteSpace(password) || password.Length < MinPasswordLength) throw new ArgumentException($"Must have a password of at least {MinPasswordLength} characters", nameof(password));
 
             if (plaintext?.Length == 0) throw new ArgumentException(@"Plaintext required", nameof(plaintext));
 
             var payload = new byte[SaltSize * 2 + nonSecretPayload.Length];
-
             Array.Copy(nonSecretPayload, payload, nonSecretPayload.Length);
-            int payloadIndex = nonSecretPayload.Length;
+            var payloadIndex = nonSecretPayload.Length;
 
             byte[] cryptKey;
             byte[] authKey;
+
             //Use Random Salt to prevent pre-generated weak password attacks.
-            using (var generator = new Rfc2898DeriveBytes(password, SaltSize, Iterations))
+            using (var generator = new Rfc2898DeriveBytes(Encoding.ASCII.GetString(key), SaltSize, Iterations))
             {
                 var salt = generator.Salt;
 
@@ -151,7 +151,7 @@ namespace CAESAR
 
             //Deriving separate key, might be less efficient than using HKDF, 
             //but now compatible with RNEncryptor which had a very similar wireformat and requires less code than HKDF.
-            using (var generator = new Rfc2898DeriveBytes(password, SaltSize, Iterations))
+            using (var generator = new Rfc2898DeriveBytes(Encoding.ASCII.GetString(key), SaltSize, Iterations))
             {
                 var salt = generator.Salt;
 
@@ -165,14 +165,10 @@ namespace CAESAR
             return Encrypt(plaintext, cryptKey, authKey, payload);
         }
 
-        public byte[] DecryptWithPassword(byte[] encryptedMessage, string password, int nonSecretPayloadLength = 0)
+        public byte[] DecryptWithPassword(byte[] encryptedMessage, int nonSecretPayloadLength = 0)
         {
             //User Error Checks
-            if (string.IsNullOrWhiteSpace(password) || password.Length < MinPasswordLength)
-                throw new ArgumentException($"Must have a password of at least {MinPasswordLength} characters!", nameof(password));
-
-            if (encryptedMessage == null || encryptedMessage.Length == 0)
-                throw new ArgumentException(@"Encrypted Message Required!", nameof(encryptedMessage));
+            if (encryptedMessage == null || encryptedMessage.Length == 0) throw new ArgumentException(@"Encrypted Message Required!", nameof(encryptedMessage));
 
             var cryptSalt = new byte[SaltSize];
             var authSalt = new byte[SaltSize];
@@ -184,16 +180,8 @@ namespace CAESAR
             byte[] cryptKey;
             byte[] authKey;
 
-            //Generate crypt key
-            using (var generator = new Rfc2898DeriveBytes(password, cryptSalt, Iterations))
-            {
-                cryptKey = generator.GetBytes(KeySize);
-            }
-            //Generate auth key
-            using (var generator = new Rfc2898DeriveBytes(password, authSalt, Iterations))
-            {
-                authKey = generator.GetBytes(KeySize);
-            }
+            using (var generator = new Rfc2898DeriveBytes(key, cryptSalt, Iterations)) cryptKey = generator.GetBytes(KeySize); //Generate crypt key
+            using (var generator = new Rfc2898DeriveBytes(key, authSalt, Iterations))authKey = generator.GetBytes(KeySize); //Generate auth key
 
             return Decrypt(encryptedMessage, cryptKey, authKey, cryptSalt.Length + authSalt.Length + nonSecretPayloadLength);
         }
