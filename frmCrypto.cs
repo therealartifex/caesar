@@ -4,9 +4,7 @@ using System.Windows.Forms;
 using System.Linq;
 using System.Text;
 using System.Security.Cryptography;
-using System.Web.Security;
 using CAESAR.Properties;
-using Google.Authenticator;
 
 namespace CAESAR
 {
@@ -64,7 +62,7 @@ namespace CAESAR
 
             if (lvwLoad.Items.Cast<ListViewItem>().Select(_ => _.SubItems[1].Text).Contains(Resources.DecryptProperty))
             {
-                var pf = new pinForm();
+                var pf = new pinForm(Encoding.ASCII.GetString(ProtectedData.Unprotect(Convert.FromBase64String(Settings.Default.tfbin), null, DataProtectionScope.CurrentUser)));
                 switch (pf.ShowDialog(this))
                 {
                     case DialogResult.OK:

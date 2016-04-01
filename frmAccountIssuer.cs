@@ -44,7 +44,7 @@ namespace CAESAR
 
         private void btnDone_Click(object sender, EventArgs e)
         {
-            var pf = new pinForm();
+            var pf = new pinForm(accountCode);
             switch (pf.ShowDialog(this))
             {
                 case DialogResult.OK:
