@@ -178,7 +178,7 @@ namespace CAESAR
             byte[] authKey;
 
             using (var generator = new Rfc2898DeriveBytes(key, cryptSalt, Iterations)) cryptKey = generator.GetBytes(KeySize); //Generate crypt key
-            using (var generator = new Rfc2898DeriveBytes(key, authSalt, Iterations))authKey = generator.GetBytes(KeySize); //Generate auth key
+            using (var generator = new Rfc2898DeriveBytes(key, authSalt, Iterations)) authKey = generator.GetBytes(KeySize); //Generate auth key
 
             return Decrypt(encryptedMessage, cryptKey, authKey, cryptSalt.Length + authSalt.Length + nonSecretPayloadLength);
         }
