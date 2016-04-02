@@ -30,8 +30,8 @@
         {
             this.picQRCode = new System.Windows.Forms.PictureBox();
             this.lblShowCode = new System.Windows.Forms.Label();
-            this.lnlManualEntry = new System.Windows.Forms.LinkLabel();
             this.btnDone = new System.Windows.Forms.Button();
+            this.btnRevealCode = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picQRCode)).BeginInit();
             this.SuspendLayout();
             // 
@@ -40,7 +40,7 @@
             this.picQRCode.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.picQRCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picQRCode.InitialImage = null;
-            this.picQRCode.Location = new System.Drawing.Point(12, 12);
+            this.picQRCode.Location = new System.Drawing.Point(12, 37);
             this.picQRCode.Name = "picQRCode";
             this.picQRCode.Size = new System.Drawing.Size(300, 300);
             this.picQRCode.TabIndex = 0;
@@ -51,42 +51,40 @@
             // lblShowCode
             // 
             this.lblShowCode.AutoSize = true;
-            this.lblShowCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblShowCode.Location = new System.Drawing.Point(318, 156);
+            this.lblShowCode.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblShowCode.Location = new System.Drawing.Point(49, 9);
             this.lblShowCode.Name = "lblShowCode";
-            this.lblShowCode.Size = new System.Drawing.Size(273, 45);
+            this.lblShowCode.Size = new System.Drawing.Size(222, 25);
             this.lblShowCode.TabIndex = 1;
-            this.lblShowCode.Text = "Mouse over the box to the left to show the code.\r\nUse the authenticator app on yo" +
-    "ur smartphone \r\nto scan it, then click Done to verify your new code.";
-            // 
-            // lnlManualEntry
-            // 
-            this.lnlManualEntry.AutoSize = true;
-            this.lnlManualEntry.Location = new System.Drawing.Point(318, 299);
-            this.lnlManualEntry.Name = "lnlManualEntry";
-            this.lnlManualEntry.Size = new System.Drawing.Size(179, 13);
-            this.lnlManualEntry.TabIndex = 2;
-            this.lnlManualEntry.TabStop = true;
-            this.lnlManualEntry.Text = "Click here if you can\'t scan the code";
-            this.lnlManualEntry.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnlManualEntry_LinkClicked);
+            this.lblShowCode.Text = "Hover to Reveal QR Code";
             // 
             // btnDone
             // 
-            this.btnDone.Location = new System.Drawing.Point(516, 289);
+            this.btnDone.Location = new System.Drawing.Point(12, 343);
             this.btnDone.Name = "btnDone";
-            this.btnDone.Size = new System.Drawing.Size(75, 23);
+            this.btnDone.Size = new System.Drawing.Size(145, 23);
             this.btnDone.TabIndex = 3;
             this.btnDone.Text = "Done";
             this.btnDone.UseVisualStyleBackColor = true;
             this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
             // 
+            // btnRevealCode
+            // 
+            this.btnRevealCode.Location = new System.Drawing.Point(167, 343);
+            this.btnRevealCode.Name = "btnRevealCode";
+            this.btnRevealCode.Size = new System.Drawing.Size(145, 23);
+            this.btnRevealCode.TabIndex = 4;
+            this.btnRevealCode.Text = "Show Account Code";
+            this.btnRevealCode.UseVisualStyleBackColor = true;
+            this.btnRevealCode.Click += new System.EventHandler(this.btnRevealCode_Click);
+            // 
             // frmAccountIssuer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 324);
+            this.ClientSize = new System.Drawing.Size(324, 378);
+            this.Controls.Add(this.btnRevealCode);
             this.Controls.Add(this.btnDone);
-            this.Controls.Add(this.lnlManualEntry);
             this.Controls.Add(this.lblShowCode);
             this.Controls.Add(this.picQRCode);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -106,7 +104,7 @@
 
         private System.Windows.Forms.PictureBox picQRCode;
         private System.Windows.Forms.Label lblShowCode;
-        private System.Windows.Forms.LinkLabel lnlManualEntry;
         private System.Windows.Forms.Button btnDone;
+        private System.Windows.Forms.Button btnRevealCode;
     }
 }

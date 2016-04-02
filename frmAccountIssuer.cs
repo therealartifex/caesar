@@ -37,11 +37,6 @@ namespace CAESAR
             picQRCode.Image = null;
         }
 
-        private void lnlManualEntry_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            MessageBox.Show(Resources.MessageAccountCode + info.ManualEntryKey, Resources.MessageBoxCaption, MessageBoxButtons.OK);
-        }
-
         private void btnDone_Click(object sender, EventArgs e)
         {
             var pf = new pinForm(accountCode);
@@ -63,6 +58,11 @@ namespace CAESAR
         private void frmAccountIssuer_FormClosing(object sender, FormClosingEventArgs e)
         {
             Settings.Default.Save();
+        }
+
+        private void btnRevealCode_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(Resources.MessageAccountCode + info.ManualEntryKey, Resources.MessageBoxCaption, MessageBoxButtons.OK);
         }
     }
 }
