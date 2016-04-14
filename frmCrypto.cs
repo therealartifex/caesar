@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Security.Cryptography;
 using CAESAR.Properties;
+// ReSharper disable PossibleMultipleEnumeration
 
 namespace CAESAR
 {
@@ -60,7 +61,12 @@ namespace CAESAR
                 return;
             }
 
-            if (lvwLoad.Items.Cast<ListViewItem>().Select(_ => _.SubItems[1].Text).Contains(Resources.DecryptProperty))
+            var crypt = new Cryptor(ProtectedData.Unprotect(Convert.FromBase64String(Settings.Default.tfbin), null, DataProtectionScope.CurrentUser));
+
+            var decryptFiles = lvwLoad.Items.Cast<ListViewItem>().Where(i => i.SubItems[1].Text == Resources.DecryptProperty).Select(_ => _.Text);
+            var encryptFiles = lvwLoad.Items.Cast<ListViewItem>().Where(i => i.SubItems[1].Text == Resources.EncryptProperty).Select(_ => _.Text);
+
+            if (decryptFiles.Any())
             {
                 var pf = new pinForm(Encoding.ASCII.GetString(ProtectedData.Unprotect(Convert.FromBase64String(Settings.Default.tfbin), null, DataProtectionScope.CurrentUser)));
                 switch (pf.ShowDialog(this))
@@ -73,29 +79,24 @@ namespace CAESAR
                     case DialogResult.Cancel:
                         return;
                 }
-                ProcDecrypt();
+
+                foreach (var f in decryptFiles)
+                {
+                    var plaintext = crypt.DecryptWithPassword(File.ReadAllBytes(f));
+                    File.WriteAllBytes(f, plaintext);
+                    File.Move(f, f.Substring(0, f.LastIndexOf(".", StringComparison.Ordinal)));
+                }
             }
 
-            if (lvwLoad.Items.Cast<ListViewItem>().Select(_ => _.SubItems[1].Text).Contains(Resources.EncryptProperty))
+            foreach (var f in encryptFiles)
             {
-                ProcEncrypt();
+                var cipherText = crypt.EncryptWithPassword(File.ReadAllBytes(f));
+                File.WriteAllBytes(f, cipherText);
+                File.Move(f, f + ".aesx");
             }
 
             lvwLoad.Items.Clear();
 
-        }
-
-        private void ProcDecrypt()
-        {
-            var crypt = new Cryptor(ProtectedData.Unprotect(Convert.FromBase64String(Settings.Default.tfbin), null, DataProtectionScope.CurrentUser));
-            var decryptFiles = lvwLoad.Items.Cast<ListViewItem>().Where(i => i.SubItems[1].Text == Resources.DecryptProperty).Select(_ => _.Text);
-
-            foreach (var f in decryptFiles)
-            {
-                var plaintext = crypt.DecryptWithPassword(File.ReadAllBytes(f));
-                File.WriteAllBytes(f, plaintext);
-                File.Move(f, f.Substring(0, f.LastIndexOf(".", StringComparison.Ordinal)));
-            }
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
@@ -110,20 +111,6 @@ namespace CAESAR
         {
             var optf = new frmOptions();
             optf.ShowDialog(this);
-        }
-
-
-        private void ProcEncrypt()
-        {
-            var crypt = new Cryptor(ProtectedData.Unprotect(Convert.FromBase64String(Settings.Default.tfbin), null, DataProtectionScope.CurrentUser));
-            var encryptFiles = lvwLoad.Items.Cast<ListViewItem>().Where(i => i.SubItems[1].Text == Resources.EncryptProperty).Select(_ => _.Text);
-            
-            foreach (var f in encryptFiles)
-            {
-                var cipherText = crypt.EncryptWithPassword(File.ReadAllBytes(f));
-                File.WriteAllBytes(f,cipherText);
-                File.Move(f, f + ".aesx");
-            }
         }
 
         private void frmCrypto_Load(object sender, EventArgs e)
