@@ -96,7 +96,6 @@ namespace CAESAR
             }
 
             lvwLoad.Items.Clear();
-
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
