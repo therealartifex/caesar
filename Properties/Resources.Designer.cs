@@ -61,6 +61,15 @@ namespace CAESAR.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to d09GRgABAAAABZdsABMAAAALYvwAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABGRlRNAAABqAAAABwAAAAcZeFvGkdERUYAAAHEAAAA5wAAATrR4MhJR1BPUwAAAqwAABgvAAA6ksJzWfBHU1VCAAAa3AAACmsAABGgn1pIBU9TLzIAACVIAAAAUgAAAFZUNJ/jY21hcAAAJZwAAAn7AAAQSiZm9PFjdnQgAAAvmAAAAFAAAABQDdwNdGZwZ20AAC/oAAABsQAAAmVTtC+nZ2FzcAAAMZwAAAAIAAAACAAAABBnbHlmAAAxpAAFEUwAClhQ7HNHXmhlYWQABULwAAAAMwAAADYInVGMaGhlYQAFQyQAAAAhAAAAJAv6D8tobXR4AAVDSAAADw4AACN62CwygGxvY2EABVJYAAAX7QAAI6QuA/mUbWF4cAAFakgAAAAgAAAAIAoIA7VuYW1lAAVqaAAAAjkAAATkVxmd2XBvc3QABWykAAAp9gAAWqR6AKDT [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string CMFont {
+            get {
+                return ResourceManager.GetString("CMFont", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DECRYPT.
         /// </summary>
         internal static string DecryptProperty {
