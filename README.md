@@ -1,7 +1,7 @@
 # caesar
 ### Current Build Status: [![Build Status](https://travis-ci.org/therealartifex/caesar.svg?branch=master)](https://travis-ci.org/therealartifex/caesar)
 
-Formerly known as the Consolidated AES Automated Runtime, now it's just CAESAR.
+Formerly known as the Consolidated AES Automated Runtime, now it's just CAESAR (a shout-out to my boy Julius).
 
 This is an honest attempt to convert six-year-old VB.NET code to nice, up-to-date C# 6 code. CAESAR uses TOTP (Time-based One-Time Password) multi-factor authentication to run encryption and decryption jobs.
 
