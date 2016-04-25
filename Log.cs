@@ -18,7 +18,7 @@ namespace CAESAR
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\sceleris\Documents\Visual Studio 2013\Projects\CAESAR\Log.tt"
+    #line 1 "C:\Users\sceleris\code\caesar\Log.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "14.0.0.0")]
     public partial class Log : LogBase
     {
@@ -28,6 +28,56 @@ namespace CAESAR
         /// </summary>
         public virtual string TransformText()
         {
+            this.Write(@"<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset=""UTF-8"">
+		<title>title</title>
+		<meta name=""author"" content=""Brian Scott"">
+		<meta name=""description"" content=""CAESAR Job Log"">
+		<meta name=""keywords"" content=""keywords,here"">
+
+		<style type=""text/css"">
+			table, th, td {
+				border: 1px solid black;
+				border-collapse: collapse;
+			}
+
+			th, td {
+				padding: 5px;
+			}
+
+
+		</style>
+	</head>
+
+	<body>
+		ayy lmao<br>
+		Job started: [insert time here]
+		<table style=""width:100%"">
+			<tr>
+				<th>Filename</th>
+				<th>Operation</th>		
+				<th>Obfuscated</th>
+			</tr>
+			<tr>
+				<td>C:\test.exe</td>
+				<td>Encrypt</td>		
+				<td>no</td>
+			</tr>
+			<tr>
+				<td>C:\test\my_ip.docx</td>
+				<td>Decrypt</td>		
+				<td>yes</td>
+			</tr>
+			<tr>
+				<td>C:\test\conversation_with_her.txt</td>
+				<td>Encrypt</td>		
+				<td>yes</td>
+			</tr>
+		</table>
+	</body>
+</html>");
             return this.GenerationEnvironment.ToString();
         }
     }

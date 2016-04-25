@@ -3,3 +3,53 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>title</title>
+		<meta name="author" content="Brian Scott">
+		<meta name="description" content="CAESAR Job Log">
+		<meta name="keywords" content="keywords,here">
+
+		<style type="text/css">
+			table, th, td {
+				border: 1px solid black;
+				border-collapse: collapse;
+			}
+
+			th, td {
+				padding: 5px;
+			}
+
+
+		</style>
+	</head>
+
+	<body>
+		ayy lmao<br>
+		Job started: [insert time here]
+		<table style="width:100%">
+			<tr>
+				<th>Filename</th>
+				<th>Operation</th>		
+				<th>Obfuscated</th>
+			</tr>
+			<tr>
+				<td>C:\test.exe</td>
+				<td>Encrypt</td>		
+				<td>no</td>
+			</tr>
+			<tr>
+				<td>C:\test\my_ip.docx</td>
+				<td>Decrypt</td>		
+				<td>yes</td>
+			</tr>
+			<tr>
+				<td>C:\test\conversation_with_her.txt</td>
+				<td>Encrypt</td>		
+				<td>yes</td>
+			</tr>
+		</table>
+	</body>
+</html>
