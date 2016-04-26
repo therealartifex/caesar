@@ -9,9 +9,6 @@
 // ------------------------------------------------------------------------------
 namespace CAESAR
 {
-    using System.Linq;
-    using System.Text;
-    using System.Collections.Generic;
     using CAESAR.Properties;
     using System;
     
@@ -40,12 +37,11 @@ namespace CAESAR
 		<meta name=""keywords"" content=""keywords,here"">
 
 		<style type=""text/css"">
-			
 			@font-face {
 				font-family: 'cmu_serifroman';
 				src: url(data:application/font-woff;charset=utf-8;base64,");
             
-            #line 21 "C:\Users\sceleris\Documents\Visual Studio 2013\Projects\CAESAR\Log.tt"
+            #line 17 "C:\Users\sceleris\Documents\Visual Studio 2013\Projects\CAESAR\Log.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Resources.CMFont));
             
             #line default
@@ -66,13 +62,28 @@ namespace CAESAR
 
 			body {
 				font-family: 'cmu_serifroman';
+				font-size: 12pt;
+			}
+
+			.filename {
+				font-family: 'Courier New';
+				font-size: 12pt;
+				font-style: normal;
+				font-variant: normal;
+				font-weight: 400;
 			}
 		</style>
 	</head>
 
 	<body>
-		ayy lmao<br>
-		Job started: [insert time here]
+		<center>Job started: ");
+            
+            #line 47 "C:\Users\sceleris\Documents\Visual Studio 2013\Projects\CAESAR\Log.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(DateTime.Now.ToString("ddd, dd MMM yyyy HH:mm:ss zzz")));
+            
+            #line default
+            #line hidden
+            this.Write(@"<br><hr></center>
 		<table style=""width:100%"">
 			<tr>
 				<th>Filename</th>
@@ -80,17 +91,17 @@ namespace CAESAR
 				<th>Obfuscated</th>
 			</tr>
 			<tr>
-				<td>C:\test.exe</td>
+				<td class=""filename"">C:\test.exe</td>
 				<td>Encrypt</td>		
 				<td>no</td>
 			</tr>
 			<tr>
-				<td>C:\test\my_ip.docx</td>
+				<td class=""filename"">C:\test\my_ip.docx</td>
 				<td>Decrypt</td>		
 				<td>yes</td>
 			</tr>
 			<tr>
-				<td>C:\test\conversation_with_her.txt</td>
+				<td class=""filename"">C:\test\conversation_with_her.txt</td>
 				<td>Encrypt</td>		
 				<td>yes</td>
 			</tr>

@@ -124,6 +124,8 @@ namespace CAESAR
                 Settings.Default.firstRun = false;
                 Settings.Default.Save();
             }
+
+            File.WriteAllText("outputLog.html", new Log().TransformText()); // For testing only
         }
     }
 }

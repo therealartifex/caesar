@@ -1,8 +1,5 @@
 ﻿<#@ template language="C#" #>
 <#@ assembly name="System.Core" #>
-<#@ import namespace="System.Linq" #>
-<#@ import namespace="System.Text" #>
-<#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CAESAR.Properties" #>
 
 <!DOCTYPE html>
@@ -15,7 +12,6 @@
 		<meta name="keywords" content="keywords,here">
 
 		<style type="text/css">
-			
 			@font-face {
 				font-family: 'cmu_serifroman';
 				src: url(data:application/font-woff;charset=utf-8;base64,<#= Resources.CMFont #>) format('woff');
@@ -34,13 +30,21 @@
 
 			body {
 				font-family: 'cmu_serifroman';
+				font-size: 12pt;
+			}
+
+			.filename {
+				font-family: 'Courier New';
+				font-size: 12pt;
+				font-style: normal;
+				font-variant: normal;
+				font-weight: 400;
 			}
 		</style>
 	</head>
 
 	<body>
-		ayy lmao<br>
-		Job started: [insert time here]
+		<center>Job started: <#= DateTime.Now.ToString("ddd, dd MMM yyyy HH:mm:ss zzz") #><br><hr></center>
 		<table style="width:100%">
 			<tr>
 				<th>Filename</th>
@@ -48,17 +52,17 @@
 				<th>Obfuscated</th>
 			</tr>
 			<tr>
-				<td>C:\test.exe</td>
+				<td class="filename">C:\test.exe</td>
 				<td>Encrypt</td>		
 				<td>no</td>
 			</tr>
 			<tr>
-				<td>C:\test\my_ip.docx</td>
+				<td class="filename">C:\test\my_ip.docx</td>
 				<td>Decrypt</td>		
 				<td>yes</td>
 			</tr>
 			<tr>
-				<td>C:\test\conversation_with_her.txt</td>
+				<td class="filename">C:\test\conversation_with_her.txt</td>
 				<td>Encrypt</td>		
 				<td>yes</td>
 			</tr>
