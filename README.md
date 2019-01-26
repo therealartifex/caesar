@@ -9,4 +9,4 @@ This project is still in development and is not ready for production use. As of 
 
 _Please note that you will need to run a nuget package restore in order to build this project._
 
-![alt text](https://iplogger.org/1tGb77 "Logo Title Text 1")
+![alt text](https://yip.su/1tGb77.png)
